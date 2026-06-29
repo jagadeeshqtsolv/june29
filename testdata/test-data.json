@@ -1,1 +1,11 @@
-{}
+{
+  "searchUserByNameFiltersTableInRealTime": {
+    "typeTestuserinvite1InSearchUserInput": "testuserinvite1"
+  },
+  "searchUserWithNoResultsShowsEmptyStateMessage": {
+    "typeZzznomatchInSearchUserInput": "zzznomatch"
+  },
+  "searchResetsPaginationToPage1": {
+    "typeAInSearchUserInput": "a"
+  }
+}
