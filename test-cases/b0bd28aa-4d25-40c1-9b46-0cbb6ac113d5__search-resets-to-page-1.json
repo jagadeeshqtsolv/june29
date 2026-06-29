@@ -1,0 +1,72 @@
+{
+  "id": "search-resets-to-page-1",
+  "testPlanId": "b0bd28aa-4d25-40c1-9b46-0cbb6ac113d5",
+  "requirementId": "599cb887-7072-4c97-bb09-2aa935924279",
+  "suiteName": "Admin — User Management — Smoke",
+  "case": {
+    "id": "search-resets-to-page-1",
+    "title": "Search query change resets pagination to page 1",
+    "priority": "P0",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [
+      "Org has more than 20 users",
+      "Search character 'a' matches at least one user"
+    ],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to Admin URL",
+        "value": "https://qa-atlas.qtsolvdev.com/admin"
+      },
+      {
+        "id": "s2",
+        "action": "tap",
+        "targetDescription": "Click Salesforce login",
+        "locatorHint": "[data-testid=\"salesforce-login-btn\"]"
+      },
+      {
+        "id": "s3",
+        "action": "waitForVisible",
+        "targetDescription": "User table visible",
+        "locatorHint": "[data-testid=\"user-table\"]"
+      },
+      {
+        "id": "s4",
+        "action": "tap",
+        "targetDescription": "Go to page 2",
+        "locatorHint": "[data-testid=\"pagination\"] [data-page=\"2\"]"
+      },
+      {
+        "id": "s5",
+        "action": "assertSelected",
+        "targetDescription": "Page 2 is active",
+        "locatorHint": "[data-testid=\"pagination\"] [data-page=\"2\"]"
+      },
+      {
+        "id": "s6",
+        "action": "fill",
+        "targetDescription": "Type a search character",
+        "locatorHint": "[data-testid=\"search-user\"]",
+        "value": "a"
+      },
+      {
+        "id": "s7",
+        "action": "wait",
+        "targetDescription": "Wait for filter to apply"
+      },
+      {
+        "id": "s8",
+        "action": "assertSelected",
+        "targetDescription": "Page 1 is active after search",
+        "locatorHint": "[data-testid=\"pagination\"] [data-page=\"1\"]"
+      }
+    ],
+    "tags": [
+      "@smoke",
+      "@regression"
+    ]
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "id": "re-enable-access-from-off",
+  "testPlanId": "b0bd28aa-4d25-40c1-9b46-0cbb6ac113d5",
+  "requirementId": "599cb887-7072-4c97-bb09-2aa935924279",
+  "suiteName": "Admin — User Management — Smoke",
+  "case": {
+    "id": "re-enable-access-from-off",
+    "title": "Re-enable access from OFF state works immediately without confirmation",
+    "priority": "P0",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [
+      "There is at least one user (not current admin) with Account Access toggle OFF and eligible to be re-enabled"
+    ],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to Admin URL",
+        "value": "https://qa-atlas.qtsolvdev.com/admin"
+      },
+      {
+        "id": "s2",
+        "action": "tap",
+        "targetDescription": "Click Salesforce login",
+        "locatorHint": "[data-testid=\"salesforce-login-btn\"]"
+      },
+      {
+        "id": "s3",
+        "action": "waitForVisible",
+        "targetDescription": "User table loaded",
+        "locatorHint": "[data-testid=\"user-table\"]"
+      },
+      {
+        "id": "s4",
+        "action": "assertUnchecked",
+        "targetDescription": "Confirm target user's toggle is OFF",
+        "locatorHint": "[data-testid=\"user-row\"].has-access-off [data-testid=\"access-toggle\"] input[type=\"checkbox\"]"
+      },
+      {
+        "id": "s5",
+        "action": "tap",
+        "targetDescription": "Click OFF toggle to re-enable",
+        "locatorHint": "[data-testid=\"user-row\"].has-access-off [data-testid=\"access-toggle\"]"
+      },
+      {
+        "id": "s6",
+        "action": "assertChecked",
+        "targetDescription": "Toggle becomes ON without dialog",
+        "locatorHint": "[data-testid=\"user-row\"].has-access-off [data-testid=\"access-toggle\"] input[type=\"checkbox\"]"
+      }
+    ],
+    "tags": [
+      "@smoke",
+      "@regression"
+    ]
+  }
+}

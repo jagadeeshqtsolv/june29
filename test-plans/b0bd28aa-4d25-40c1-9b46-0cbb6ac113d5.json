@@ -1,0 +1,888 @@
+{
+  "id": "b0bd28aa-4d25-40c1-9b46-0cbb6ac113d5",
+  "requirementId": "599cb887-7072-4c97-bb09-2aa935924279",
+  "model": "gpt-5",
+  "createdAt": "2026-06-29T14:29:21.814Z",
+  "plan": {
+    "version": 1,
+    "suiteName": "Admin — User Management — Smoke",
+    "cases": [
+      {
+        "id": "load-admin-tabs-and-header",
+        "title": "Admin page loads with correct tabs, default active tab, header elements, and table columns",
+        "priority": "P0",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [
+          "Org has at least 1 user"
+        ],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to Admin URL",
+            "value": "https://qa-atlas.qtsolvdev.com/admin"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Click Salesforce login",
+            "locatorHint": "[data-testid=\"salesforce-login-btn\"]"
+          },
+          {
+            "id": "s3",
+            "action": "waitForVisible",
+            "targetDescription": "Admin tabs container",
+            "locatorHint": "[data-testid=\"admin-tabs\"]"
+          },
+          {
+            "id": "s4",
+            "action": "assertText",
+            "targetDescription": "First tab label",
+            "locatorHint": "[data-testid=\"admin-tabs\"] [role=\"tab\"]:nth-child(1)",
+            "assertion": "User Management"
+          },
+          {
+            "id": "s5",
+            "action": "assertText",
+            "targetDescription": "Second tab label",
+            "locatorHint": "[data-testid=\"admin-tabs\"] [role=\"tab\"]:nth-child(2)",
+            "assertion": "Roles & Access"
+          },
+          {
+            "id": "s6",
+            "action": "assertText",
+            "targetDescription": "Third tab label",
+            "locatorHint": "[data-testid=\"admin-tabs\"] [role=\"tab\"]:nth-child(3)",
+            "assertion": "Audit Log"
+          },
+          {
+            "id": "s7",
+            "action": "assertSelected",
+            "targetDescription": "User Management tab is selected by default",
+            "locatorHint": "[data-testid=\"admin-tabs\"] [role=\"tab\"]:nth-child(1)"
+          },
+          {
+            "id": "s8",
+            "action": "assertVisible",
+            "targetDescription": "\"N Users\" count label",
+            "locatorHint": "[data-testid=\"user-count\"]"
+          },
+          {
+            "id": "s9",
+            "action": "assertVisible",
+            "targetDescription": "Search input",
+            "locatorHint": "[data-testid=\"search-user\"][placeholder=\"Search user\"]"
+          },
+          {
+            "id": "s10",
+            "action": "assertVisible",
+            "targetDescription": "Invite user button",
+            "locatorHint": "[data-testid=\"invite-user-btn\"]"
+          },
+          {
+            "id": "s11",
+            "action": "waitForVisible",
+            "targetDescription": "User table",
+            "locatorHint": "[data-testid=\"user-table\"]"
+          },
+          {
+            "id": "s12",
+            "action": "assertCount",
+            "targetDescription": "Header columns count",
+            "locatorHint": "[data-testid=\"user-table\"] thead th"
+          },
+          {
+            "id": "s13",
+            "action": "assertText",
+            "targetDescription": "Header col 1: User information",
+            "locatorHint": "[data-testid=\"user-table\"] thead th:nth-child(1)",
+            "assertion": "User information"
+          },
+          {
+            "id": "s14",
+            "action": "assertText",
+            "targetDescription": "Header col 2: Role",
+            "locatorHint": "[data-testid=\"user-table\"] thead th:nth-child(2)",
+            "assertion": "Role"
+          },
+          {
+            "id": "s15",
+            "action": "assertText",
+            "targetDescription": "Header col 3: Status",
+            "locatorHint": "[data-testid=\"user-table\"] thead th:nth-child(3)",
+            "assertion": "Status"
+          },
+          {
+            "id": "s16",
+            "action": "assertText",
+            "targetDescription": "Header col 4: Last active",
+            "locatorHint": "[data-testid=\"user-table\"] thead th:nth-child(4)",
+            "assertion": "Last active"
+          },
+          {
+            "id": "s17",
+            "action": "assertText",
+            "targetDescription": "Header col 5: Account Access",
+            "locatorHint": "[data-testid=\"user-table\"] thead th:nth-child(5)",
+            "assertion": "Account Access"
+          }
+        ],
+        "tags": [
+          "@smoke",
+          "@regression"
+        ]
+      },
+      {
+        "id": "switch-tabs-roles-access-and-back",
+        "title": "Switch from User Management to Roles & Access and back",
+        "priority": "P0",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [
+          "Org has at least 1 user"
+        ],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to Admin URL",
+            "value": "https://qa-atlas.qtsolvdev.com/admin"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Click Salesforce login",
+            "locatorHint": "[data-testid=\"salesforce-login-btn\"]"
+          },
+          {
+            "id": "s3",
+            "action": "waitForVisible",
+            "targetDescription": "Ensure User Management tab is visible",
+            "locatorHint": "[data-testid=\"admin-tabs\"] [role=\"tab\"]:nth-child(1)"
+          },
+          {
+            "id": "s4",
+            "action": "tap",
+            "targetDescription": "Click Roles & Access tab",
+            "locatorHint": "[data-testid=\"admin-tabs\"] [role=\"tab\"]:nth-child(2)"
+          },
+          {
+            "id": "s5",
+            "action": "waitForVisible",
+            "targetDescription": "Roles & Access view",
+            "locatorHint": "[data-testid=\"roles-access-view\"]"
+          },
+          {
+            "id": "s6",
+            "action": "tap",
+            "targetDescription": "Click User Management tab",
+            "locatorHint": "[data-testid=\"admin-tabs\"] [role=\"tab\"]:nth-child(1)"
+          },
+          {
+            "id": "s7",
+            "action": "waitForVisible",
+            "targetDescription": "User table visible again",
+            "locatorHint": "[data-testid=\"user-table\"]"
+          }
+        ],
+        "tags": [
+          "@smoke",
+          "@regression"
+        ]
+      },
+      {
+        "id": "search-filters-real-time",
+        "title": "Search filters user table in real time by name/email (case-insensitive match)",
+        "priority": "P0",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [
+          "Org has multiple users",
+          "At least one user name or email contains 'testuserinvite1' (any case)"
+        ],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to Admin URL",
+            "value": "https://qa-atlas.qtsolvdev.com/admin"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Click Salesforce login",
+            "locatorHint": "[data-testid=\"salesforce-login-btn\"]"
+          },
+          {
+            "id": "s3",
+            "action": "waitForVisible",
+            "targetDescription": "Ensure user table is visible",
+            "locatorHint": "[data-testid=\"user-table\"]"
+          },
+          {
+            "id": "s4",
+            "action": "fill",
+            "targetDescription": "Type query into Search user input",
+            "locatorHint": "[data-testid=\"search-user\"]",
+            "value": "testuserinvite1"
+          },
+          {
+            "id": "s5",
+            "action": "wait",
+            "targetDescription": "Wait for real-time filtering"
+          },
+          {
+            "id": "s6",
+            "action": "assertContainsText",
+            "targetDescription": "Filtered table contains query in visible rows",
+            "locatorHint": "[data-testid=\"user-table\"] tbody",
+            "assertion": "testuserinvite1"
+          },
+          {
+            "id": "s7",
+            "action": "assertContainsText",
+            "targetDescription": "\"N Users\" label remains visible (count does not change during filtering)",
+            "locatorHint": "[data-testid=\"user-count\"]",
+            "assertion": "Users"
+          }
+        ],
+        "tags": [
+          "@smoke",
+          "@regression"
+        ]
+      },
+      {
+        "id": "search-no-results-state",
+        "title": "Search with no results shows empty-state message and keeps header row visible",
+        "priority": "P0",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [
+          "Org has users but none matching 'zzznomatch'"
+        ],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to Admin URL",
+            "value": "https://qa-atlas.qtsolvdev.com/admin"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Click Salesforce login",
+            "locatorHint": "[data-testid=\"salesforce-login-btn\"]"
+          },
+          {
+            "id": "s3",
+            "action": "waitForVisible",
+            "targetDescription": "Ensure user table is visible",
+            "locatorHint": "[data-testid=\"user-table\"]"
+          },
+          {
+            "id": "s4",
+            "action": "fill",
+            "targetDescription": "Type no-match query into Search user",
+            "locatorHint": "[data-testid=\"search-user\"]",
+            "value": "zzznomatch"
+          },
+          {
+            "id": "s5",
+            "action": "wait",
+            "targetDescription": "Wait for filter to apply"
+          },
+          {
+            "id": "s6",
+            "action": "assertContainsText",
+            "targetDescription": "Empty-state message in table body",
+            "locatorHint": "[data-testid=\"user-table\"] tbody",
+            "assertion": "No users found"
+          },
+          {
+            "id": "s7",
+            "action": "assertContainsText",
+            "targetDescription": "Empty-state message includes the query",
+            "locatorHint": "[data-testid=\"user-table\"] tbody",
+            "assertion": "zzznomatch"
+          },
+          {
+            "id": "s8",
+            "action": "assertVisible",
+            "targetDescription": "Table header row remains visible",
+            "locatorHint": "[data-testid=\"user-table\"] thead tr"
+          }
+        ],
+        "tags": [
+          "@smoke",
+          "@regression"
+        ]
+      },
+      {
+        "id": "revoke-account-access-confirm",
+        "title": "Revoke access via confirmation dialog sets toggle OFF and updates status",
+        "priority": "P0",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [
+          "There is at least one active user (not current admin) with Account Access toggle ON"
+        ],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to Admin URL",
+            "value": "https://qa-atlas.qtsolvdev.com/admin"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Click Salesforce login",
+            "locatorHint": "[data-testid=\"salesforce-login-btn\"]"
+          },
+          {
+            "id": "s3",
+            "action": "waitForVisible",
+            "targetDescription": "User table loaded",
+            "locatorHint": "[data-testid=\"user-table\"]"
+          },
+          {
+            "id": "s4",
+            "action": "assertChecked",
+            "targetDescription": "Confirm target user's access toggle is ON",
+            "locatorHint": "[data-testid=\"user-row\"].is-active [data-testid=\"access-toggle\"] input[type=\"checkbox\"]"
+          },
+          {
+            "id": "s5",
+            "action": "tap",
+            "targetDescription": "Click ON toggle to revoke",
+            "locatorHint": "[data-testid=\"user-row\"].is-active [data-testid=\"access-toggle\"]"
+          },
+          {
+            "id": "s6",
+            "action": "waitForVisible",
+            "targetDescription": "Revoke confirmation dialog",
+            "locatorHint": "[data-testid=\"revoke-confirm-dialog\"]"
+          },
+          {
+            "id": "s7",
+            "action": "assertContainsText",
+            "targetDescription": "Dialog title is 'Revoke access?'",
+            "locatorHint": "[data-testid=\"revoke-confirm-dialog\"] [data-testid=\"dialog-title\"]",
+            "assertion": "Revoke access?"
+          },
+          {
+            "id": "s8",
+            "action": "tap",
+            "targetDescription": "Confirm revoke",
+            "locatorHint": "[data-testid=\"confirm-revoke\"]"
+          },
+          {
+            "id": "s9",
+            "action": "waitForHidden",
+            "targetDescription": "Dialog closes",
+            "locatorHint": "[data-testid=\"revoke-confirm-dialog\"]"
+          },
+          {
+            "id": "s10",
+            "action": "assertUnchecked",
+            "targetDescription": "Toggle is now OFF",
+            "locatorHint": "[data-testid=\"user-row\"].was-active [data-testid=\"access-toggle\"] input[type=\"checkbox\"]"
+          },
+          {
+            "id": "s11",
+            "action": "assertText",
+            "targetDescription": "Status badge shows Inactive",
+            "locatorHint": "[data-testid=\"user-row\"].was-active [data-testid=\"cell-status\"]",
+            "assertion": "Inactive"
+          }
+        ],
+        "tags": [
+          "@smoke",
+          "@regression"
+        ]
+      },
+      {
+        "id": "cancel-revoke-keeps-toggle-on",
+        "title": "Cancel revocation keeps access toggle ON and user state unchanged",
+        "priority": "P0",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [
+          "There is at least one active user (not current admin) with Account Access toggle ON"
+        ],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to Admin URL",
+            "value": "https://qa-atlas.qtsolvdev.com/admin"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Click Salesforce login",
+            "locatorHint": "[data-testid=\"salesforce-login-btn\"]"
+          },
+          {
+            "id": "s3",
+            "action": "waitForVisible",
+            "targetDescription": "User table loaded",
+            "locatorHint": "[data-testid=\"user-table\"]"
+          },
+          {
+            "id": "s4",
+            "action": "tap",
+            "targetDescription": "Click an ON access toggle",
+            "locatorHint": "[data-testid=\"user-row\"].is-active [data-testid=\"access-toggle\"]"
+          },
+          {
+            "id": "s5",
+            "action": "waitForVisible",
+            "targetDescription": "Revoke confirmation dialog",
+            "locatorHint": "[data-testid=\"revoke-confirm-dialog\"]"
+          },
+          {
+            "id": "s6",
+            "action": "tap",
+            "targetDescription": "Click Cancel",
+            "locatorHint": "[data-testid=\"cancel-revoke\"]"
+          },
+          {
+            "id": "s7",
+            "action": "waitForHidden",
+            "targetDescription": "Dialog closes",
+            "locatorHint": "[data-testid=\"revoke-confirm-dialog\"]"
+          },
+          {
+            "id": "s8",
+            "action": "assertChecked",
+            "targetDescription": "Toggle remains ON",
+            "locatorHint": "[data-testid=\"user-row\"].is-active [data-testid=\"access-toggle\"] input[type=\"checkbox\"]"
+          }
+        ],
+        "tags": [
+          "@smoke",
+          "@regression"
+        ]
+      },
+      {
+        "id": "re-enable-access-from-off",
+        "title": "Re-enable access from OFF state works immediately without confirmation",
+        "priority": "P0",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [
+          "There is at least one user (not current admin) with Account Access toggle OFF and eligible to be re-enabled"
+        ],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to Admin URL",
+            "value": "https://qa-atlas.qtsolvdev.com/admin"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Click Salesforce login",
+            "locatorHint": "[data-testid=\"salesforce-login-btn\"]"
+          },
+          {
+            "id": "s3",
+            "action": "waitForVisible",
+            "targetDescription": "User table loaded",
+            "locatorHint": "[data-testid=\"user-table\"]"
+          },
+          {
+            "id": "s4",
+            "action": "assertUnchecked",
+            "targetDescription": "Confirm target user's toggle is OFF",
+            "locatorHint": "[data-testid=\"user-row\"].has-access-off [data-testid=\"access-toggle\"] input[type=\"checkbox\"]"
+          },
+          {
+            "id": "s5",
+            "action": "tap",
+            "targetDescription": "Click OFF toggle to re-enable",
+            "locatorHint": "[data-testid=\"user-row\"].has-access-off [data-testid=\"access-toggle\"]"
+          },
+          {
+            "id": "s6",
+            "action": "assertChecked",
+            "targetDescription": "Toggle becomes ON without dialog",
+            "locatorHint": "[data-testid=\"user-row\"].has-access-off [data-testid=\"access-toggle\"] input[type=\"checkbox\"]"
+          }
+        ],
+        "tags": [
+          "@smoke",
+          "@regression"
+        ]
+      },
+      {
+        "id": "current-admin-row-protected",
+        "title": "Current admin's Account Access toggle is disabled and shows tooltip on hover",
+        "priority": "P0",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [
+          "Logged-in portal administrator is present in the user table"
+        ],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to Admin URL",
+            "value": "https://qa-atlas.qtsolvdev.com/admin"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Click Salesforce login",
+            "locatorHint": "[data-testid=\"salesforce-login-btn\"]"
+          },
+          {
+            "id": "s3",
+            "action": "waitForVisible",
+            "targetDescription": "Current admin row visible",
+            "locatorHint": "[data-testid=\"current-admin-row\"]"
+          },
+          {
+            "id": "s4",
+            "action": "assertDisabled",
+            "targetDescription": "Admin's access toggle is disabled",
+            "locatorHint": "[data-testid=\"current-admin-row\"] [data-testid=\"access-toggle\"]"
+          },
+          {
+            "id": "s5",
+            "action": "hover",
+            "targetDescription": "Hover admin's disabled toggle",
+            "locatorHint": "[data-testid=\"current-admin-row\"] [data-testid=\"access-toggle\"]"
+          },
+          {
+            "id": "s6",
+            "action": "assertVisible",
+            "targetDescription": "Tooltip explains protection",
+            "locatorHint": "[role=\"tooltip\"]",
+            "assertion": "You cannot revoke your own access."
+          }
+        ],
+        "tags": [
+          "@smoke",
+          "@regression"
+        ]
+      },
+      {
+        "id": "pagination-next-page",
+        "title": "Pagination shows 20 rows per page and Next/Previous controls when >20 users",
+        "priority": "P0",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [
+          "Org has more than 20 users (e.g., 21+)"
+        ],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to Admin URL",
+            "value": "https://qa-atlas.qtsolvdev.com/admin"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Click Salesforce login",
+            "locatorHint": "[data-testid=\"salesforce-login-btn\"]"
+          },
+          {
+            "id": "s3",
+            "action": "waitForVisible",
+            "targetDescription": "User table visible",
+            "locatorHint": "[data-testid=\"user-table\"]"
+          },
+          {
+            "id": "s4",
+            "action": "assertCount",
+            "targetDescription": "Page 1 shows 20 rows",
+            "locatorHint": "[data-testid=\"user-table\"] tbody [data-testid=\"user-row\"]"
+          },
+          {
+            "id": "s5",
+            "action": "assertVisible",
+            "targetDescription": "Pagination controls visible",
+            "locatorHint": "[data-testid=\"pagination\"]"
+          },
+          {
+            "id": "s6",
+            "action": "tap",
+            "targetDescription": "Click Next page",
+            "locatorHint": "[data-testid=\"pagination\"] [data-testid=\"next-page\"]"
+          },
+          {
+            "id": "s7",
+            "action": "wait",
+            "targetDescription": "Wait for page change"
+          },
+          {
+            "id": "s8",
+            "action": "assertEnabled",
+            "targetDescription": "Previous button becomes active",
+            "locatorHint": "[data-testid=\"pagination\"] [data-testid=\"prev-page\"]"
+          }
+        ],
+        "tags": [
+          "@smoke",
+          "@regression"
+        ]
+      },
+      {
+        "id": "search-resets-to-page-1",
+        "title": "Search query change resets pagination to page 1",
+        "priority": "P0",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [
+          "Org has more than 20 users",
+          "Search character 'a' matches at least one user"
+        ],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to Admin URL",
+            "value": "https://qa-atlas.qtsolvdev.com/admin"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Click Salesforce login",
+            "locatorHint": "[data-testid=\"salesforce-login-btn\"]"
+          },
+          {
+            "id": "s3",
+            "action": "waitForVisible",
+            "targetDescription": "User table visible",
+            "locatorHint": "[data-testid=\"user-table\"]"
+          },
+          {
+            "id": "s4",
+            "action": "tap",
+            "targetDescription": "Go to page 2",
+            "locatorHint": "[data-testid=\"pagination\"] [data-page=\"2\"]"
+          },
+          {
+            "id": "s5",
+            "action": "assertSelected",
+            "targetDescription": "Page 2 is active",
+            "locatorHint": "[data-testid=\"pagination\"] [data-page=\"2\"]"
+          },
+          {
+            "id": "s6",
+            "action": "fill",
+            "targetDescription": "Type a search character",
+            "locatorHint": "[data-testid=\"search-user\"]",
+            "value": "a"
+          },
+          {
+            "id": "s7",
+            "action": "wait",
+            "targetDescription": "Wait for filter to apply"
+          },
+          {
+            "id": "s8",
+            "action": "assertSelected",
+            "targetDescription": "Page 1 is active after search",
+            "locatorHint": "[data-testid=\"pagination\"] [data-page=\"1\"]"
+          }
+        ],
+        "tags": [
+          "@smoke",
+          "@regression"
+        ]
+      },
+      {
+        "id": "inactive-users-toggle-off",
+        "title": "Inactive users always show Account Access toggle OFF",
+        "priority": "P0",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [
+          "At least one inactive user is present in the table"
+        ],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to Admin URL",
+            "value": "https://qa-atlas.qtsolvdev.com/admin"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Click Salesforce login",
+            "locatorHint": "[data-testid=\"salesforce-login-btn\"]"
+          },
+          {
+            "id": "s3",
+            "action": "waitForVisible",
+            "targetDescription": "User table visible",
+            "locatorHint": "[data-testid=\"user-table\"]"
+          },
+          {
+            "id": "s4",
+            "action": "assertText",
+            "targetDescription": "Find an Inactive status badge",
+            "locatorHint": "[data-testid=\"user-row\"].is-inactive [data-testid=\"cell-status\"]",
+            "assertion": "Inactive"
+          },
+          {
+            "id": "s5",
+            "action": "assertUnchecked",
+            "targetDescription": "Inactive user's toggle is OFF",
+            "locatorHint": "[data-testid=\"user-row\"].is-inactive [data-testid=\"access-toggle\"] input[type=\"checkbox\"]"
+          }
+        ],
+        "tags": [
+          "@smoke",
+          "@regression"
+        ]
+      },
+      {
+        "id": "last-active-never",
+        "title": "User who has never logged in shows 'Never' in Last active",
+        "priority": "P0",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [
+          "At least one user has never logged in"
+        ],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to Admin URL",
+            "value": "https://qa-atlas.qtsolvdev.com/admin"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Click Salesforce login",
+            "locatorHint": "[data-testid=\"salesforce-login-btn\"]"
+          },
+          {
+            "id": "s3",
+            "action": "waitForVisible",
+            "targetDescription": "User table visible",
+            "locatorHint": "[data-testid=\"user-table\"]"
+          },
+          {
+            "id": "s4",
+            "action": "assertText",
+            "targetDescription": "Last active cell shows 'Never'",
+            "locatorHint": "[data-testid=\"user-row\"].never-logged-in [data-testid=\"cell-last-active\"]",
+            "assertion": "Never"
+          }
+        ],
+        "tags": [
+          "@smoke",
+          "@regression"
+        ]
+      },
+      {
+        "id": "last-active-relative-time",
+        "title": "Last active shows relative time string for users who have logged in",
+        "priority": "P0",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [
+          "At least one user has logged in previously (not 'Never')"
+        ],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to Admin URL",
+            "value": "https://qa-atlas.qtsolvdev.com/admin"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Click Salesforce login",
+            "locatorHint": "[data-testid=\"salesforce-login-btn\"]"
+          },
+          {
+            "id": "s3",
+            "action": "waitForVisible",
+            "targetDescription": "User table visible",
+            "locatorHint": "[data-testid=\"user-table\"]"
+          },
+          {
+            "id": "s4",
+            "action": "assertContainsText",
+            "targetDescription": "A Last active cell shows relative time like 'X ago'",
+            "locatorHint": "[data-testid=\"user-row\"].has-activity [data-testid=\"cell-last-active\"]",
+            "assertion": "ago"
+          }
+        ],
+        "tags": [
+          "@smoke",
+          "@regression"
+        ]
+      },
+      {
+        "id": "role-cell-plain-text",
+        "title": "Role cell displays plain text role label (e.g., Admin)",
+        "priority": "P0",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [
+          "At least one user has role 'Admin'"
+        ],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to Admin URL",
+            "value": "https://qa-atlas.qtsolvdev.com/admin"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Click Salesforce login",
+            "locatorHint": "[data-testid=\"salesforce-login-btn\"]"
+          },
+          {
+            "id": "s3",
+            "action": "waitForVisible",
+            "targetDescription": "User table visible",
+            "locatorHint": "[data-testid=\"user-table\"]"
+          },
+          {
+            "id": "s4",
+            "action": "assertText",
+            "targetDescription": "Role cell shows plain text 'Admin'",
+            "locatorHint": "[data-testid=\"user-row\"].role-admin [data-testid=\"cell-role\"]",
+            "assertion": "Admin"
+          }
+        ],
+        "tags": [
+          "@smoke",
+          "@regression"
+        ]
+      }
+    ]
+  }
+}

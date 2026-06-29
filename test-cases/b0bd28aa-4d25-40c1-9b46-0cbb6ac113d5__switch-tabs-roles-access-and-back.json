@@ -1,0 +1,65 @@
+{
+  "id": "switch-tabs-roles-access-and-back",
+  "testPlanId": "b0bd28aa-4d25-40c1-9b46-0cbb6ac113d5",
+  "requirementId": "599cb887-7072-4c97-bb09-2aa935924279",
+  "suiteName": "Admin — User Management — Smoke",
+  "case": {
+    "id": "switch-tabs-roles-access-and-back",
+    "title": "Switch from User Management to Roles & Access and back",
+    "priority": "P0",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [
+      "Org has at least 1 user"
+    ],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to Admin URL",
+        "value": "https://qa-atlas.qtsolvdev.com/admin"
+      },
+      {
+        "id": "s2",
+        "action": "tap",
+        "targetDescription": "Click Salesforce login",
+        "locatorHint": "[data-testid=\"salesforce-login-btn\"]"
+      },
+      {
+        "id": "s3",
+        "action": "waitForVisible",
+        "targetDescription": "Ensure User Management tab is visible",
+        "locatorHint": "[data-testid=\"admin-tabs\"] [role=\"tab\"]:nth-child(1)"
+      },
+      {
+        "id": "s4",
+        "action": "tap",
+        "targetDescription": "Click Roles & Access tab",
+        "locatorHint": "[data-testid=\"admin-tabs\"] [role=\"tab\"]:nth-child(2)"
+      },
+      {
+        "id": "s5",
+        "action": "waitForVisible",
+        "targetDescription": "Roles & Access view",
+        "locatorHint": "[data-testid=\"roles-access-view\"]"
+      },
+      {
+        "id": "s6",
+        "action": "tap",
+        "targetDescription": "Click User Management tab",
+        "locatorHint": "[data-testid=\"admin-tabs\"] [role=\"tab\"]:nth-child(1)"
+      },
+      {
+        "id": "s7",
+        "action": "waitForVisible",
+        "targetDescription": "User table visible again",
+        "locatorHint": "[data-testid=\"user-table\"]"
+      }
+    ],
+    "tags": [
+      "@smoke",
+      "@regression"
+    ]
+  }
+}

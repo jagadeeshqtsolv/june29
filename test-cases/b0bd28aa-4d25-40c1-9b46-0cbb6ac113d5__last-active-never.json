@@ -1,0 +1,48 @@
+{
+  "id": "last-active-never",
+  "testPlanId": "b0bd28aa-4d25-40c1-9b46-0cbb6ac113d5",
+  "requirementId": "599cb887-7072-4c97-bb09-2aa935924279",
+  "suiteName": "Admin — User Management — Smoke",
+  "case": {
+    "id": "last-active-never",
+    "title": "User who has never logged in shows 'Never' in Last active",
+    "priority": "P0",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [
+      "At least one user has never logged in"
+    ],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to Admin URL",
+        "value": "https://qa-atlas.qtsolvdev.com/admin"
+      },
+      {
+        "id": "s2",
+        "action": "tap",
+        "targetDescription": "Click Salesforce login",
+        "locatorHint": "[data-testid=\"salesforce-login-btn\"]"
+      },
+      {
+        "id": "s3",
+        "action": "waitForVisible",
+        "targetDescription": "User table visible",
+        "locatorHint": "[data-testid=\"user-table\"]"
+      },
+      {
+        "id": "s4",
+        "action": "assertText",
+        "targetDescription": "Last active cell shows 'Never'",
+        "locatorHint": "[data-testid=\"user-row\"].never-logged-in [data-testid=\"cell-last-active\"]",
+        "assertion": "Never"
+      }
+    ],
+    "tags": [
+      "@smoke",
+      "@regression"
+    ]
+  }
+}

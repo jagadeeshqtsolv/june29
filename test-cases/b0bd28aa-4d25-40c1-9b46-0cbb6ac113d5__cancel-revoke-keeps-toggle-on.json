@@ -1,0 +1,71 @@
+{
+  "id": "cancel-revoke-keeps-toggle-on",
+  "testPlanId": "b0bd28aa-4d25-40c1-9b46-0cbb6ac113d5",
+  "requirementId": "599cb887-7072-4c97-bb09-2aa935924279",
+  "suiteName": "Admin — User Management — Smoke",
+  "case": {
+    "id": "cancel-revoke-keeps-toggle-on",
+    "title": "Cancel revocation keeps access toggle ON and user state unchanged",
+    "priority": "P0",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [
+      "There is at least one active user (not current admin) with Account Access toggle ON"
+    ],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to Admin URL",
+        "value": "https://qa-atlas.qtsolvdev.com/admin"
+      },
+      {
+        "id": "s2",
+        "action": "tap",
+        "targetDescription": "Click Salesforce login",
+        "locatorHint": "[data-testid=\"salesforce-login-btn\"]"
+      },
+      {
+        "id": "s3",
+        "action": "waitForVisible",
+        "targetDescription": "User table loaded",
+        "locatorHint": "[data-testid=\"user-table\"]"
+      },
+      {
+        "id": "s4",
+        "action": "tap",
+        "targetDescription": "Click an ON access toggle",
+        "locatorHint": "[data-testid=\"user-row\"].is-active [data-testid=\"access-toggle\"]"
+      },
+      {
+        "id": "s5",
+        "action": "waitForVisible",
+        "targetDescription": "Revoke confirmation dialog",
+        "locatorHint": "[data-testid=\"revoke-confirm-dialog\"]"
+      },
+      {
+        "id": "s6",
+        "action": "tap",
+        "targetDescription": "Click Cancel",
+        "locatorHint": "[data-testid=\"cancel-revoke\"]"
+      },
+      {
+        "id": "s7",
+        "action": "waitForHidden",
+        "targetDescription": "Dialog closes",
+        "locatorHint": "[data-testid=\"revoke-confirm-dialog\"]"
+      },
+      {
+        "id": "s8",
+        "action": "assertChecked",
+        "targetDescription": "Toggle remains ON",
+        "locatorHint": "[data-testid=\"user-row\"].is-active [data-testid=\"access-toggle\"] input[type=\"checkbox\"]"
+      }
+    ],
+    "tags": [
+      "@smoke",
+      "@regression"
+    ]
+  }
+}

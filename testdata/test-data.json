@@ -62,5 +62,14 @@
   },
   "searchShowsNoUsersFoundMessageForNoMatches": {
     "searchUserInput": "zzznomatch"
+  },
+  "searchFiltersUserTableInRealTimeByNameEmailCaseInsensitiveMatch": {
+    "typeQueryIntoSearchUserInput": "testuserinvite1"
+  },
+  "searchWithNoResultsShowsEmptyStateMessageAndKeepsHeaderRowVisible": {
+    "typeNoMatchQueryIntoSearchUser": "zzznomatch"
+  },
+  "searchQueryChangeResetsPaginationToPage1": {
+    "typeASearchCharacter": "a"
   }
 }

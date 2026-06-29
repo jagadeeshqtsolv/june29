@@ -1,0 +1,68 @@
+{
+  "id": "search-filters-real-time",
+  "testPlanId": "b0bd28aa-4d25-40c1-9b46-0cbb6ac113d5",
+  "requirementId": "599cb887-7072-4c97-bb09-2aa935924279",
+  "suiteName": "Admin — User Management — Smoke",
+  "case": {
+    "id": "search-filters-real-time",
+    "title": "Search filters user table in real time by name/email (case-insensitive match)",
+    "priority": "P0",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [
+      "Org has multiple users",
+      "At least one user name or email contains 'testuserinvite1' (any case)"
+    ],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to Admin URL",
+        "value": "https://qa-atlas.qtsolvdev.com/admin"
+      },
+      {
+        "id": "s2",
+        "action": "tap",
+        "targetDescription": "Click Salesforce login",
+        "locatorHint": "[data-testid=\"salesforce-login-btn\"]"
+      },
+      {
+        "id": "s3",
+        "action": "waitForVisible",
+        "targetDescription": "Ensure user table is visible",
+        "locatorHint": "[data-testid=\"user-table\"]"
+      },
+      {
+        "id": "s4",
+        "action": "fill",
+        "targetDescription": "Type query into Search user input",
+        "locatorHint": "[data-testid=\"search-user\"]",
+        "value": "testuserinvite1"
+      },
+      {
+        "id": "s5",
+        "action": "wait",
+        "targetDescription": "Wait for real-time filtering"
+      },
+      {
+        "id": "s6",
+        "action": "assertContainsText",
+        "targetDescription": "Filtered table contains query in visible rows",
+        "locatorHint": "[data-testid=\"user-table\"] tbody",
+        "assertion": "testuserinvite1"
+      },
+      {
+        "id": "s7",
+        "action": "assertContainsText",
+        "targetDescription": "\"N Users\" label remains visible (count does not change during filtering)",
+        "locatorHint": "[data-testid=\"user-count\"]",
+        "assertion": "Users"
+      }
+    ],
+    "tags": [
+      "@smoke",
+      "@regression"
+    ]
+  }
+}

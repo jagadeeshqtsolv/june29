@@ -1,0 +1,133 @@
+{
+  "id": "load-admin-tabs-and-header",
+  "testPlanId": "b0bd28aa-4d25-40c1-9b46-0cbb6ac113d5",
+  "requirementId": "599cb887-7072-4c97-bb09-2aa935924279",
+  "suiteName": "Admin — User Management — Smoke",
+  "case": {
+    "id": "load-admin-tabs-and-header",
+    "title": "Admin page loads with correct tabs, default active tab, header elements, and table columns",
+    "priority": "P0",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [
+      "Org has at least 1 user"
+    ],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to Admin URL",
+        "value": "https://qa-atlas.qtsolvdev.com/admin"
+      },
+      {
+        "id": "s2",
+        "action": "tap",
+        "targetDescription": "Click Salesforce login",
+        "locatorHint": "[data-testid=\"salesforce-login-btn\"]"
+      },
+      {
+        "id": "s3",
+        "action": "waitForVisible",
+        "targetDescription": "Admin tabs container",
+        "locatorHint": "[data-testid=\"admin-tabs\"]"
+      },
+      {
+        "id": "s4",
+        "action": "assertText",
+        "targetDescription": "First tab label",
+        "locatorHint": "[data-testid=\"admin-tabs\"] [role=\"tab\"]:nth-child(1)",
+        "assertion": "User Management"
+      },
+      {
+        "id": "s5",
+        "action": "assertText",
+        "targetDescription": "Second tab label",
+        "locatorHint": "[data-testid=\"admin-tabs\"] [role=\"tab\"]:nth-child(2)",
+        "assertion": "Roles & Access"
+      },
+      {
+        "id": "s6",
+        "action": "assertText",
+        "targetDescription": "Third tab label",
+        "locatorHint": "[data-testid=\"admin-tabs\"] [role=\"tab\"]:nth-child(3)",
+        "assertion": "Audit Log"
+      },
+      {
+        "id": "s7",
+        "action": "assertSelected",
+        "targetDescription": "User Management tab is selected by default",
+        "locatorHint": "[data-testid=\"admin-tabs\"] [role=\"tab\"]:nth-child(1)"
+      },
+      {
+        "id": "s8",
+        "action": "assertVisible",
+        "targetDescription": "\"N Users\" count label",
+        "locatorHint": "[data-testid=\"user-count\"]"
+      },
+      {
+        "id": "s9",
+        "action": "assertVisible",
+        "targetDescription": "Search input",
+        "locatorHint": "[data-testid=\"search-user\"][placeholder=\"Search user\"]"
+      },
+      {
+        "id": "s10",
+        "action": "assertVisible",
+        "targetDescription": "Invite user button",
+        "locatorHint": "[data-testid=\"invite-user-btn\"]"
+      },
+      {
+        "id": "s11",
+        "action": "waitForVisible",
+        "targetDescription": "User table",
+        "locatorHint": "[data-testid=\"user-table\"]"
+      },
+      {
+        "id": "s12",
+        "action": "assertCount",
+        "targetDescription": "Header columns count",
+        "locatorHint": "[data-testid=\"user-table\"] thead th"
+      },
+      {
+        "id": "s13",
+        "action": "assertText",
+        "targetDescription": "Header col 1: User information",
+        "locatorHint": "[data-testid=\"user-table\"] thead th:nth-child(1)",
+        "assertion": "User information"
+      },
+      {
+        "id": "s14",
+        "action": "assertText",
+        "targetDescription": "Header col 2: Role",
+        "locatorHint": "[data-testid=\"user-table\"] thead th:nth-child(2)",
+        "assertion": "Role"
+      },
+      {
+        "id": "s15",
+        "action": "assertText",
+        "targetDescription": "Header col 3: Status",
+        "locatorHint": "[data-testid=\"user-table\"] thead th:nth-child(3)",
+        "assertion": "Status"
+      },
+      {
+        "id": "s16",
+        "action": "assertText",
+        "targetDescription": "Header col 4: Last active",
+        "locatorHint": "[data-testid=\"user-table\"] thead th:nth-child(4)",
+        "assertion": "Last active"
+      },
+      {
+        "id": "s17",
+        "action": "assertText",
+        "targetDescription": "Header col 5: Account Access",
+        "locatorHint": "[data-testid=\"user-table\"] thead th:nth-child(5)",
+        "assertion": "Account Access"
+      }
+    ],
+    "tags": [
+      "@smoke",
+      "@regression"
+    ]
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "id": "revoke-account-access-confirm",
+  "testPlanId": "b0bd28aa-4d25-40c1-9b46-0cbb6ac113d5",
+  "requirementId": "599cb887-7072-4c97-bb09-2aa935924279",
+  "suiteName": "Admin — User Management — Smoke",
+  "case": {
+    "id": "revoke-account-access-confirm",
+    "title": "Revoke access via confirmation dialog sets toggle OFF and updates status",
+    "priority": "P0",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [
+      "There is at least one active user (not current admin) with Account Access toggle ON"
+    ],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to Admin URL",
+        "value": "https://qa-atlas.qtsolvdev.com/admin"
+      },
+      {
+        "id": "s2",
+        "action": "tap",
+        "targetDescription": "Click Salesforce login",
+        "locatorHint": "[data-testid=\"salesforce-login-btn\"]"
+      },
+      {
+        "id": "s3",
+        "action": "waitForVisible",
+        "targetDescription": "User table loaded",
+        "locatorHint": "[data-testid=\"user-table\"]"
+      },
+      {
+        "id": "s4",
+        "action": "assertChecked",
+        "targetDescription": "Confirm target user's access toggle is ON",
+        "locatorHint": "[data-testid=\"user-row\"].is-active [data-testid=\"access-toggle\"] input[type=\"checkbox\"]"
+      },
+      {
+        "id": "s5",
+        "action": "tap",
+        "targetDescription": "Click ON toggle to revoke",
+        "locatorHint": "[data-testid=\"user-row\"].is-active [data-testid=\"access-toggle\"]"
+      },
+      {
+        "id": "s6",
+        "action": "waitForVisible",
+        "targetDescription": "Revoke confirmation dialog",
+        "locatorHint": "[data-testid=\"revoke-confirm-dialog\"]"
+      },
+      {
+        "id": "s7",
+        "action": "assertContainsText",
+        "targetDescription": "Dialog title is 'Revoke access?'",
+        "locatorHint": "[data-testid=\"revoke-confirm-dialog\"] [data-testid=\"dialog-title\"]",
+        "assertion": "Revoke access?"
+      },
+      {
+        "id": "s8",
+        "action": "tap",
+        "targetDescription": "Confirm revoke",
+        "locatorHint": "[data-testid=\"confirm-revoke\"]"
+      },
+      {
+        "id": "s9",
+        "action": "waitForHidden",
+        "targetDescription": "Dialog closes",
+        "locatorHint": "[data-testid=\"revoke-confirm-dialog\"]"
+      },
+      {
+        "id": "s10",
+        "action": "assertUnchecked",
+        "targetDescription": "Toggle is now OFF",
+        "locatorHint": "[data-testid=\"user-row\"].was-active [data-testid=\"access-toggle\"] input[type=\"checkbox\"]"
+      },
+      {
+        "id": "s11",
+        "action": "assertText",
+        "targetDescription": "Status badge shows Inactive",
+        "locatorHint": "[data-testid=\"user-row\"].was-active [data-testid=\"cell-status\"]",
+        "assertion": "Inactive"
+      }
+    ],
+    "tags": [
+      "@smoke",
+      "@regression"
+    ]
+  }
+}

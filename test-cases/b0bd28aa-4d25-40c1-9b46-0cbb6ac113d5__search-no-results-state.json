@@ -1,0 +1,73 @@
+{
+  "id": "search-no-results-state",
+  "testPlanId": "b0bd28aa-4d25-40c1-9b46-0cbb6ac113d5",
+  "requirementId": "599cb887-7072-4c97-bb09-2aa935924279",
+  "suiteName": "Admin — User Management — Smoke",
+  "case": {
+    "id": "search-no-results-state",
+    "title": "Search with no results shows empty-state message and keeps header row visible",
+    "priority": "P0",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [
+      "Org has users but none matching 'zzznomatch'"
+    ],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to Admin URL",
+        "value": "https://qa-atlas.qtsolvdev.com/admin"
+      },
+      {
+        "id": "s2",
+        "action": "tap",
+        "targetDescription": "Click Salesforce login",
+        "locatorHint": "[data-testid=\"salesforce-login-btn\"]"
+      },
+      {
+        "id": "s3",
+        "action": "waitForVisible",
+        "targetDescription": "Ensure user table is visible",
+        "locatorHint": "[data-testid=\"user-table\"]"
+      },
+      {
+        "id": "s4",
+        "action": "fill",
+        "targetDescription": "Type no-match query into Search user",
+        "locatorHint": "[data-testid=\"search-user\"]",
+        "value": "zzznomatch"
+      },
+      {
+        "id": "s5",
+        "action": "wait",
+        "targetDescription": "Wait for filter to apply"
+      },
+      {
+        "id": "s6",
+        "action": "assertContainsText",
+        "targetDescription": "Empty-state message in table body",
+        "locatorHint": "[data-testid=\"user-table\"] tbody",
+        "assertion": "No users found"
+      },
+      {
+        "id": "s7",
+        "action": "assertContainsText",
+        "targetDescription": "Empty-state message includes the query",
+        "locatorHint": "[data-testid=\"user-table\"] tbody",
+        "assertion": "zzznomatch"
+      },
+      {
+        "id": "s8",
+        "action": "assertVisible",
+        "targetDescription": "Table header row remains visible",
+        "locatorHint": "[data-testid=\"user-table\"] thead tr"
+      }
+    ],
+    "tags": [
+      "@smoke",
+      "@regression"
+    ]
+  }
+}

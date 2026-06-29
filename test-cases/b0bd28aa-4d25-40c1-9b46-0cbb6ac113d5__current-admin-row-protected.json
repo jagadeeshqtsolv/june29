@@ -1,0 +1,60 @@
+{
+  "id": "current-admin-row-protected",
+  "testPlanId": "b0bd28aa-4d25-40c1-9b46-0cbb6ac113d5",
+  "requirementId": "599cb887-7072-4c97-bb09-2aa935924279",
+  "suiteName": "Admin — User Management — Smoke",
+  "case": {
+    "id": "current-admin-row-protected",
+    "title": "Current admin's Account Access toggle is disabled and shows tooltip on hover",
+    "priority": "P0",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [
+      "Logged-in portal administrator is present in the user table"
+    ],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to Admin URL",
+        "value": "https://qa-atlas.qtsolvdev.com/admin"
+      },
+      {
+        "id": "s2",
+        "action": "tap",
+        "targetDescription": "Click Salesforce login",
+        "locatorHint": "[data-testid=\"salesforce-login-btn\"]"
+      },
+      {
+        "id": "s3",
+        "action": "waitForVisible",
+        "targetDescription": "Current admin row visible",
+        "locatorHint": "[data-testid=\"current-admin-row\"]"
+      },
+      {
+        "id": "s4",
+        "action": "assertDisabled",
+        "targetDescription": "Admin's access toggle is disabled",
+        "locatorHint": "[data-testid=\"current-admin-row\"] [data-testid=\"access-toggle\"]"
+      },
+      {
+        "id": "s5",
+        "action": "hover",
+        "targetDescription": "Hover admin's disabled toggle",
+        "locatorHint": "[data-testid=\"current-admin-row\"] [data-testid=\"access-toggle\"]"
+      },
+      {
+        "id": "s6",
+        "action": "assertVisible",
+        "targetDescription": "Tooltip explains protection",
+        "locatorHint": "[role=\"tooltip\"]",
+        "assertion": "You cannot revoke your own access."
+      }
+    ],
+    "tags": [
+      "@smoke",
+      "@regression"
+    ]
+  }
+}
