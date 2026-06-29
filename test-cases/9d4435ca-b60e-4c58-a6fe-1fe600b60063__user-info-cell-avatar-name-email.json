@@ -1,0 +1,46 @@
+{
+  "id": "user-info-cell-avatar-name-email",
+  "testPlanId": "9d4435ca-b60e-4c58-a6fe-1fe600b60063",
+  "requirementId": "0bde0038-d6bb-4e5a-b08a-0925b55e4c88",
+  "suiteName": "Admin — User Management: SMOKE",
+  "case": {
+    "id": "user-info-cell-avatar-name-email",
+    "title": "User information cell renders avatar, name, and email correctly",
+    "priority": "P0",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [],
+    "steps": [
+      {
+        "id": "step1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to Admin page",
+        "locatorHint": "https://qa-atlas.qtsolvdev.com/admin",
+        "value": "https://qa-atlas.qtsolvdev.com/admin"
+      },
+      {
+        "id": "step2",
+        "action": "assertVisible",
+        "targetDescription": "User avatar is circular and visible",
+        "locatorHint": "[data-testid='user-avatar']"
+      },
+      {
+        "id": "step3",
+        "action": "assertVisible",
+        "targetDescription": "Full name is bold on first line",
+        "locatorHint": "[data-testid='user-fullname']"
+      },
+      {
+        "id": "step4",
+        "action": "assertVisible",
+        "targetDescription": "Email address is muted on second line",
+        "locatorHint": "[data-testid='user-email']"
+      }
+    ],
+    "tags": [
+      "@smoke",
+      "@regression"
+    ]
+  }
+}

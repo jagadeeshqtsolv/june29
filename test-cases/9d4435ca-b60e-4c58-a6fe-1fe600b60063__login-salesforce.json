@@ -1,0 +1,40 @@
+{
+  "id": "login-salesforce",
+  "testPlanId": "9d4435ca-b60e-4c58-a6fe-1fe600b60063",
+  "requirementId": "0bde0038-d6bb-4e5a-b08a-0925b55e4c88",
+  "suiteName": "Admin — User Management: SMOKE",
+  "case": {
+    "id": "login-salesforce",
+    "title": "Login via Salesforce and land on /admin",
+    "priority": "P0",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [],
+    "steps": [
+      {
+        "id": "step1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to Admin page",
+        "locatorHint": "https://qa-atlas.qtsolvdev.com/admin",
+        "value": "https://qa-atlas.qtsolvdev.com/admin"
+      },
+      {
+        "id": "step2",
+        "action": "tap",
+        "targetDescription": "Click Salesforce login button",
+        "locatorHint": "button:has-text('Salesforce Login')"
+      },
+      {
+        "id": "step3",
+        "action": "assertVisible",
+        "targetDescription": "User Management tab is visible and active",
+        "locatorHint": "tab[aria-selected='true'][role='tab']:has-text('User Management')"
+      }
+    ],
+    "tags": [
+      "@smoke",
+      "@regression"
+    ]
+  }
+}

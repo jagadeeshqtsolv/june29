@@ -1,0 +1,40 @@
+{
+  "id": "status-cell-badges",
+  "testPlanId": "9d4435ca-b60e-4c58-a6fe-1fe600b60063",
+  "requirementId": "0bde0038-d6bb-4e5a-b08a-0925b55e4c88",
+  "suiteName": "Admin — User Management: SMOKE",
+  "case": {
+    "id": "status-cell-badges",
+    "title": "Status cell shows correct badge for active and inactive users",
+    "priority": "P0",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [],
+    "steps": [
+      {
+        "id": "step1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to Admin page",
+        "locatorHint": "https://qa-atlas.qtsolvdev.com/admin",
+        "value": "https://qa-atlas.qtsolvdev.com/admin"
+      },
+      {
+        "id": "step2",
+        "action": "assertVisible",
+        "targetDescription": "Active user shows green 'Active' badge",
+        "locatorHint": "td[data-testid='status-cell'] span.badge-green"
+      },
+      {
+        "id": "step3",
+        "action": "assertVisible",
+        "targetDescription": "Inactive user shows red 'Inactive' badge",
+        "locatorHint": "td[data-testid='status-cell'] span.badge-red"
+      }
+    ],
+    "tags": [
+      "@smoke",
+      "@regression"
+    ]
+  }
+}

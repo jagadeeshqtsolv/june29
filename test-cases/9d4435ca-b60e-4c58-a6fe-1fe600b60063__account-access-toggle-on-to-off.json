@@ -1,0 +1,52 @@
+{
+  "id": "account-access-toggle-on-to-off",
+  "testPlanId": "9d4435ca-b60e-4c58-a6fe-1fe600b60063",
+  "requirementId": "0bde0038-d6bb-4e5a-b08a-0925b55e4c88",
+  "suiteName": "Admin — User Management: SMOKE",
+  "case": {
+    "id": "account-access-toggle-on-to-off",
+    "title": "Revoke account access for active user (ON to OFF with confirmation)",
+    "priority": "P0",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [],
+    "steps": [
+      {
+        "id": "step1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to Admin page",
+        "locatorHint": "https://qa-atlas.qtsolvdev.com/admin",
+        "value": "https://qa-atlas.qtsolvdev.com/admin"
+      },
+      {
+        "id": "step2",
+        "action": "tap",
+        "targetDescription": "Click ON toggle for an active user",
+        "locatorHint": "[data-testid='account-access-toggle'][aria-checked='true']"
+      },
+      {
+        "id": "step3",
+        "action": "assertVisible",
+        "targetDescription": "Confirmation dialog appears",
+        "locatorHint": "[role='dialog']"
+      },
+      {
+        "id": "step4",
+        "action": "tap",
+        "targetDescription": "Click 'Revoke' button in dialog",
+        "locatorHint": "button:has-text('Revoke')"
+      },
+      {
+        "id": "step5",
+        "action": "assertVisible",
+        "targetDescription": "Toggle is now OFF (grey)",
+        "locatorHint": "[data-testid='account-access-toggle'][aria-checked='false']"
+      }
+    ],
+    "tags": [
+      "@smoke",
+      "@regression"
+    ]
+  }
+}

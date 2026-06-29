@@ -1,0 +1,47 @@
+{
+  "id": "search-resets-pagination",
+  "testPlanId": "9d4435ca-b60e-4c58-a6fe-1fe600b60063",
+  "requirementId": "0bde0038-d6bb-4e5a-b08a-0925b55e4c88",
+  "suiteName": "Admin — User Management: SMOKE",
+  "case": {
+    "id": "search-resets-pagination",
+    "title": "Search resets pagination to page 1",
+    "priority": "P0",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [],
+    "steps": [
+      {
+        "id": "step1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to Admin page with >20 users",
+        "locatorHint": "https://qa-atlas.qtsolvdev.com/admin",
+        "value": "https://qa-atlas.qtsolvdev.com/admin"
+      },
+      {
+        "id": "step2",
+        "action": "tap",
+        "targetDescription": "Go to page 2 using pagination",
+        "locatorHint": "button:has-text('2')"
+      },
+      {
+        "id": "step3",
+        "action": "fill",
+        "targetDescription": "Type 'a' in Search user input",
+        "locatorHint": "input[placeholder='Search user']",
+        "value": "a"
+      },
+      {
+        "id": "step4",
+        "action": "assertVisible",
+        "targetDescription": "Pagination is reset to page 1",
+        "locatorHint": "button[aria-current='page']:has-text('1')"
+      }
+    ],
+    "tags": [
+      "@smoke",
+      "@regression"
+    ]
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "id": "admin-row-toggle-disabled",
+  "testPlanId": "9d4435ca-b60e-4c58-a6fe-1fe600b60063",
+  "requirementId": "0bde0038-d6bb-4e5a-b08a-0925b55e4c88",
+  "suiteName": "Admin — User Management: SMOKE",
+  "case": {
+    "id": "admin-row-toggle-disabled",
+    "title": "Admin's own row: toggle is disabled and shows tooltip on hover",
+    "priority": "P0",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [],
+    "steps": [
+      {
+        "id": "step1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to Admin page",
+        "locatorHint": "https://qa-atlas.qtsolvdev.com/admin",
+        "value": "https://qa-atlas.qtsolvdev.com/admin"
+      },
+      {
+        "id": "step2",
+        "action": "assertDisabled",
+        "targetDescription": "Admin's own Account Access toggle is disabled",
+        "locatorHint": "[data-testid='account-access-toggle'][data-self='true']"
+      },
+      {
+        "id": "step3",
+        "action": "hover",
+        "targetDescription": "Hover over Admin's own toggle",
+        "locatorHint": "[data-testid='account-access-toggle'][data-self='true']"
+      },
+      {
+        "id": "step4",
+        "action": "assertVisible",
+        "targetDescription": "Tooltip 'You cannot revoke your own access.' is displayed",
+        "locatorHint": "[role='tooltip']:has-text('You cannot revoke your own access.')"
+      }
+    ],
+    "tags": [
+      "@smoke",
+      "@regression"
+    ]
+  }
+}
