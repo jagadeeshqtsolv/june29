@@ -1,0 +1,67 @@
+{
+  "id": "pagination-resets-to-page-1-on-search",
+  "testPlanId": "06c435b6-0c9d-4175-938c-8fbb344a0a0c",
+  "requirementId": "0bde0038-d6bb-4e5a-b08a-0925b55e4c88",
+  "suiteName": "Admin — User Management — Functional Happy Paths",
+  "case": {
+    "id": "pagination-resets-to-page-1-on-search",
+    "title": "Changing search query resets pagination to page 1",
+    "priority": "P1",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [
+      "Org has more than 20 users; at least two pages of results"
+    ],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to Admin URL",
+        "value": "https://qa-atlas.qtsolvdev.com/admin"
+      },
+      {
+        "id": "s2",
+        "action": "tap",
+        "targetDescription": "Salesforce login button",
+        "locatorHint": "text=Salesforce login"
+      },
+      {
+        "id": "s3",
+        "action": "tap",
+        "targetDescription": "Go to Next page",
+        "locatorHint": "[data-testid='pagination'] button:has-text('Next')"
+      },
+      {
+        "id": "s4",
+        "action": "wait",
+        "targetDescription": "Wait for page 2",
+        "value": "500"
+      },
+      {
+        "id": "s5",
+        "action": "typeText",
+        "targetDescription": "Type a new character into search",
+        "locatorHint": "input[placeholder='Search user']",
+        "value": "a"
+      },
+      {
+        "id": "s6",
+        "action": "wait",
+        "targetDescription": "Wait for filter to apply",
+        "value": "500"
+      },
+      {
+        "id": "s7",
+        "action": "assertText",
+        "targetDescription": "Active page is 1",
+        "locatorHint": "[data-testid='pagination'] [aria-current='page']",
+        "assertion": "1"
+      }
+    ],
+    "tags": [
+      "@functional",
+      "@regression"
+    ]
+  }
+}

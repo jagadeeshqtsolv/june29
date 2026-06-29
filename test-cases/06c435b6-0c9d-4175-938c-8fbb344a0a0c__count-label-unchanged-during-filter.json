@@ -1,0 +1,68 @@
+{
+  "id": "count-label-unchanged-during-filter",
+  "testPlanId": "06c435b6-0c9d-4175-938c-8fbb344a0a0c",
+  "requirementId": "0bde0038-d6bb-4e5a-b08a-0925b55e4c88",
+  "suiteName": "Admin — User Management — Functional Happy Paths",
+  "case": {
+    "id": "count-label-unchanged-during-filter",
+    "title": "N Users count label does not change when filtering",
+    "priority": "P1",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [
+      "Org total users is known and fixed at 21"
+    ],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to Admin URL",
+        "value": "https://qa-atlas.qtsolvdev.com/admin"
+      },
+      {
+        "id": "s2",
+        "action": "tap",
+        "targetDescription": "Salesforce login button",
+        "locatorHint": "text=Salesforce login"
+      },
+      {
+        "id": "s3",
+        "action": "waitForVisible",
+        "targetDescription": "Users count label",
+        "locatorHint": "[data-testid='users-count']"
+      },
+      {
+        "id": "s4",
+        "action": "assertText",
+        "targetDescription": "Initial count label shows '21 Users'",
+        "locatorHint": "[data-testid='users-count']",
+        "assertion": "21 Users"
+      },
+      {
+        "id": "s5",
+        "action": "typeText",
+        "targetDescription": "Apply no-result filter",
+        "locatorHint": "input[placeholder='Search user']",
+        "value": "zzznomatch"
+      },
+      {
+        "id": "s6",
+        "action": "waitForVisible",
+        "targetDescription": "Empty state message",
+        "locatorHint": "[data-testid='users-empty-state']"
+      },
+      {
+        "id": "s7",
+        "action": "assertText",
+        "targetDescription": "Count label remains '21 Users'",
+        "locatorHint": "[data-testid='users-count']",
+        "assertion": "21 Users"
+      }
+    ],
+    "tags": [
+      "@functional",
+      "@regression"
+    ]
+  }
+}

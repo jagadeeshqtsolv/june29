@@ -1,0 +1,77 @@
+{
+  "id": "pagination-more-than-20-users",
+  "testPlanId": "06c435b6-0c9d-4175-938c-8fbb344a0a0c",
+  "requirementId": "0bde0038-d6bb-4e5a-b08a-0925b55e4c88",
+  "suiteName": "Admin — User Management — Functional Happy Paths",
+  "case": {
+    "id": "pagination-more-than-20-users",
+    "title": "Pagination shows 20 rows per page and Next/Previous controls when total users > 20",
+    "priority": "P0",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [
+      "Org has more than 20 users (e.g., 42)"
+    ],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to Admin URL",
+        "value": "https://qa-atlas.qtsolvdev.com/admin"
+      },
+      {
+        "id": "s2",
+        "action": "tap",
+        "targetDescription": "Salesforce login button",
+        "locatorHint": "text=Salesforce login"
+      },
+      {
+        "id": "s3",
+        "action": "waitForVisible",
+        "targetDescription": "User table",
+        "locatorHint": "[data-testid='users-table']"
+      },
+      {
+        "id": "s4",
+        "action": "assertCount",
+        "targetDescription": "Page 1 shows 20 rows",
+        "locatorHint": "[data-testid='users-table'] tbody tr"
+      },
+      {
+        "id": "s5",
+        "action": "assertVisible",
+        "targetDescription": "Pagination controls visible",
+        "locatorHint": "[data-testid='pagination']"
+      },
+      {
+        "id": "s6",
+        "action": "tap",
+        "targetDescription": "Click Next page",
+        "locatorHint": "[data-testid='pagination'] button:has-text('Next')"
+      },
+      {
+        "id": "s7",
+        "action": "wait",
+        "targetDescription": "Wait for page change",
+        "value": "500"
+      },
+      {
+        "id": "s8",
+        "action": "assertVisible",
+        "targetDescription": "Previous button active",
+        "locatorHint": "[data-testid='pagination'] button:has-text('Previous')"
+      },
+      {
+        "id": "s9",
+        "action": "assertVisible",
+        "targetDescription": "Current page is 2 (aria-current)",
+        "locatorHint": "[data-testid='pagination'] [aria-current='page']"
+      }
+    ],
+    "tags": [
+      "@functional",
+      "@regression"
+    ]
+  }
+}

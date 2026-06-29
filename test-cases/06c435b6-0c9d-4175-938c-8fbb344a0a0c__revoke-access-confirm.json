@@ -1,0 +1,98 @@
+{
+  "id": "revoke-access-confirm",
+  "testPlanId": "06c435b6-0c9d-4175-938c-8fbb344a0a0c",
+  "requirementId": "0bde0038-d6bb-4e5a-b08a-0925b55e4c88",
+  "suiteName": "Admin — User Management — Functional Happy Paths",
+  "case": {
+    "id": "revoke-access-confirm",
+    "title": "Revoke access from ON toggle prompts confirmation and sets toggle OFF upon confirm",
+    "priority": "P0",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [
+      "Test data: active user 'Revoke Target' exists with Account Access toggle ON and is not the logged-in admin"
+    ],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to Admin URL",
+        "value": "https://qa-atlas.qtsolvdev.com/admin"
+      },
+      {
+        "id": "s2",
+        "action": "tap",
+        "targetDescription": "Salesforce login button",
+        "locatorHint": "text=Salesforce login"
+      },
+      {
+        "id": "s3",
+        "action": "fill",
+        "targetDescription": "Search 'Revoke Target'",
+        "locatorHint": "input[placeholder='Search user']",
+        "value": "Revoke Target"
+      },
+      {
+        "id": "s4",
+        "action": "waitForVisible",
+        "targetDescription": "Revoke Target row",
+        "locatorHint": "[data-testid='users-table'] tbody tr:first-child"
+      },
+      {
+        "id": "s5",
+        "action": "assertChecked",
+        "targetDescription": "Access toggle is ON before revocation",
+        "locatorHint": "[data-testid='users-table'] tbody tr:first-child [data-testid='access-toggle'] input[type='checkbox']"
+      },
+      {
+        "id": "s6",
+        "action": "tap",
+        "targetDescription": "Click ON toggle",
+        "locatorHint": "[data-testid='users-table'] tbody tr:first-child [data-testid='access-toggle']"
+      },
+      {
+        "id": "s7",
+        "action": "waitForVisible",
+        "targetDescription": "Confirmation dialog",
+        "locatorHint": "[data-testid='revoke-access-dialog']"
+      },
+      {
+        "id": "s8",
+        "action": "assertText",
+        "targetDescription": "Dialog title",
+        "locatorHint": "[data-testid='revoke-access-dialog'] [data-testid='dialog-title']",
+        "assertion": "Revoke access?"
+      },
+      {
+        "id": "s9",
+        "action": "assertContainsText",
+        "targetDescription": "Dialog message includes user name",
+        "locatorHint": "[data-testid='revoke-access-dialog'] [data-testid='dialog-message']",
+        "assertion": "This will prevent Revoke Target from accessing the portal."
+      },
+      {
+        "id": "s10",
+        "action": "tap",
+        "targetDescription": "Confirm Revoke",
+        "locatorHint": "[data-testid='revoke-access-dialog'] button:has-text('Revoke')"
+      },
+      {
+        "id": "s11",
+        "action": "waitForHidden",
+        "targetDescription": "Dialog closes",
+        "locatorHint": "[data-testid='revoke-access-dialog']"
+      },
+      {
+        "id": "s12",
+        "action": "assertUnchecked",
+        "targetDescription": "Access toggle is OFF after revocation",
+        "locatorHint": "[data-testid='users-table'] tbody tr:first-child [data-testid='access-toggle'] input[type='checkbox']"
+      }
+    ],
+    "tags": [
+      "@functional",
+      "@regression"
+    ]
+  }
+}

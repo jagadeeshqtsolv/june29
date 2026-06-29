@@ -1,0 +1,53 @@
+{
+  "id": "table-scrollable-overflow",
+  "testPlanId": "06c435b6-0c9d-4175-938c-8fbb344a0a0c",
+  "requirementId": "0bde0038-d6bb-4e5a-b08a-0925b55e4c88",
+  "suiteName": "Admin — User Management — Functional Happy Paths",
+  "case": {
+    "id": "table-scrollable-overflow",
+    "title": "User table is scrollable when content exceeds viewport",
+    "priority": "P2",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [
+      "Org has >20 users; table height exceeds viewport height"
+    ],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to Admin URL",
+        "value": "https://qa-atlas.qtsolvdev.com/admin"
+      },
+      {
+        "id": "s2",
+        "action": "tap",
+        "targetDescription": "Salesforce login button",
+        "locatorHint": "text=Salesforce login"
+      },
+      {
+        "id": "s3",
+        "action": "waitForVisible",
+        "targetDescription": "User table",
+        "locatorHint": "[data-testid='users-table']"
+      },
+      {
+        "id": "s4",
+        "action": "scrollIntoView",
+        "targetDescription": "Scroll to last row on page (row 20)",
+        "locatorHint": "[data-testid='users-table'] tbody tr:nth-child(20)"
+      },
+      {
+        "id": "s5",
+        "action": "assertVisible",
+        "targetDescription": "Row 20 visible after scroll",
+        "locatorHint": "[data-testid='users-table'] tbody tr:nth-child(20)"
+      }
+    ],
+    "tags": [
+      "@functional",
+      "@regression"
+    ]
+  }
+}

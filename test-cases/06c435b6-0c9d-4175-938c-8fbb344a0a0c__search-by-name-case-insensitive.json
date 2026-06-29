@@ -1,0 +1,61 @@
+{
+  "id": "search-by-name-case-insensitive",
+  "testPlanId": "06c435b6-0c9d-4175-938c-8fbb344a0a0c",
+  "requirementId": "0bde0038-d6bb-4e5a-b08a-0925b55e4c88",
+  "suiteName": "Admin — User Management — Functional Happy Paths",
+  "case": {
+    "id": "search-by-name-case-insensitive",
+    "title": "Search by name filters table in real time (case-insensitive, partial match)",
+    "priority": "P0",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [
+      "Test data: user 'TestUserInvite1' exists in org"
+    ],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to Admin URL",
+        "value": "https://qa-atlas.qtsolvdev.com/admin"
+      },
+      {
+        "id": "s2",
+        "action": "tap",
+        "targetDescription": "Salesforce login button",
+        "locatorHint": "text=Salesforce login"
+      },
+      {
+        "id": "s3",
+        "action": "clear",
+        "targetDescription": "Clear search input",
+        "locatorHint": "input[placeholder='Search user']"
+      },
+      {
+        "id": "s4",
+        "action": "typeText",
+        "targetDescription": "Type lowercase query 'testuserinvite1'",
+        "locatorHint": "input[placeholder='Search user']",
+        "value": "testuserinvite1"
+      },
+      {
+        "id": "s5",
+        "action": "waitForVisible",
+        "targetDescription": "First filtered row appears",
+        "locatorHint": "[data-testid='users-table'] tbody tr:first-child"
+      },
+      {
+        "id": "s6",
+        "action": "assertContainsText",
+        "targetDescription": "Row contains query in name or email",
+        "locatorHint": "[data-testid='users-table'] tbody tr:first-child",
+        "assertion": "testuserinvite1"
+      }
+    ],
+    "tags": [
+      "@functional",
+      "@regression"
+    ]
+  }
+}

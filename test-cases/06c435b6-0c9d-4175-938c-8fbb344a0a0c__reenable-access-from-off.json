@@ -1,0 +1,72 @@
+{
+  "id": "reenable-access-from-off",
+  "testPlanId": "06c435b6-0c9d-4175-938c-8fbb344a0a0c",
+  "requirementId": "0bde0038-d6bb-4e5a-b08a-0925b55e4c88",
+  "suiteName": "Admin — User Management — Functional Happy Paths",
+  "case": {
+    "id": "reenable-access-from-off",
+    "title": "Re-enable access from OFF toggle without confirmation",
+    "priority": "P0",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [
+      "Test data: user 'Revoked Target' exists with Account Access toggle OFF (previously active)"
+    ],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to Admin URL",
+        "value": "https://qa-atlas.qtsolvdev.com/admin"
+      },
+      {
+        "id": "s2",
+        "action": "tap",
+        "targetDescription": "Salesforce login button",
+        "locatorHint": "text=Salesforce login"
+      },
+      {
+        "id": "s3",
+        "action": "fill",
+        "targetDescription": "Search 'Revoked Target'",
+        "locatorHint": "input[placeholder='Search user']",
+        "value": "Revoked Target"
+      },
+      {
+        "id": "s4",
+        "action": "waitForVisible",
+        "targetDescription": "Revoked Target row",
+        "locatorHint": "[data-testid='users-table'] tbody tr:first-child"
+      },
+      {
+        "id": "s5",
+        "action": "assertUnchecked",
+        "targetDescription": "Access toggle is OFF before",
+        "locatorHint": "[data-testid='users-table'] tbody tr:first-child [data-testid='access-toggle'] input[type='checkbox']"
+      },
+      {
+        "id": "s6",
+        "action": "tap",
+        "targetDescription": "Click OFF toggle to enable",
+        "locatorHint": "[data-testid='users-table'] tbody tr:first-child [data-testid='access-toggle']"
+      },
+      {
+        "id": "s7",
+        "action": "wait",
+        "targetDescription": "Small wait for immediate state change",
+        "value": "500"
+      },
+      {
+        "id": "s8",
+        "action": "assertChecked",
+        "targetDescription": "Access toggle is ON after enabling",
+        "locatorHint": "[data-testid='users-table'] tbody tr:first-child [data-testid='access-toggle'] input[type='checkbox']"
+      }
+    ],
+    "tags": [
+      "@functional",
+      "@regression"
+    ]
+  }
+}

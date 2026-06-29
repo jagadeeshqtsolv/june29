@@ -7,5 +7,54 @@
   },
   "searchResetsPaginationToPage1": {
     "typeAInSearchUserInput": "a"
+  },
+  "userInformationCellShowsSsoProfilePhotoWhenAvailable": {
+    "searchPhotouserOne": "PhotoUser One"
+  },
+  "userInformationCellFallsBackToInitialsWhenNoPhotoNameAvailable": {
+    "searchJaneDoe": "Jane Doe"
+  },
+  "userInformationCellForEmailOnlyAccountShowsEmailOnFirstLineAndInitialsFromEmailPrefix": {
+    "searchEmailOnlyUser": "lonely.user@example.com"
+  },
+  "roleCellDisplaysPlainTextRoleLabelEGFinance": {
+    "searchFinancePerson": "Finance Person"
+  },
+  "statusCellShowsActiveOrInactiveBadgeAsAppropriate": {
+    "searchActivePerson": "Active Person",
+    "searchInactivePerson": "Inactive Person"
+  },
+  "lastActiveShowsRelativeTimeStringForUsersWhoHaveLoggedIn": {
+    "searchRecentUser": "Recent User"
+  },
+  "lastActiveShowsNeverForUsersWhoHaveNeverLoggedIn": {
+    "searchNeverUser": "Never User"
+  },
+  "revokeAccessFromOnTogglePromptsConfirmationAndSetsToggleOffUponConfirm": {
+    "searchRevokeTarget": "Revoke Target"
+  },
+  "cancelRevokingAccessLeavesOnToggleUnchanged": {
+    "searchCancelTarget": "Cancel Target"
+  },
+  "reEnableAccessFromOffToggleWithoutConfirmation": {
+    "searchRevokedTarget": "Revoked Target"
+  },
+  "adminSOwnRowHasDisabledToggleAndShowsTooltipOnHover": {
+    "searchCurrentAdminEmail": "admin.qa@example.com"
+  },
+  "searchByNameFiltersTableInRealTimeCaseInsensitivePartialMatch": {
+    "typeLowercaseQueryTestuserinvite1": "testuserinvite1"
+  },
+  "searchByEmailPartialStringMatchesCaseInsensitively": {
+    "typeUppercasePartialFinance": "FINANCE."
+  },
+  "searchWithNoResultsShowsNoUsersFoundForQueryWhileHeaderRemains": {
+    "typeNoMatchQuery": "zzznomatch"
+  },
+  "nUsersCountLabelDoesNotChangeWhenFiltering": {
+    "applyNoResultFilter": "zzznomatch"
+  },
+  "changingSearchQueryResetsPaginationToPage1": {
+    "typeANewCharacterIntoSearch": "a"
   }
 }

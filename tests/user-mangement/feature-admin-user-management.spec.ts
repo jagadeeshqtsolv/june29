@@ -57,3 +57,46 @@ test('User Management header shows N Users, Search user input, and Invite user b
     await userManagementPage.expectInviteUserVisible();
   });
 });
+
+
+test('Admin page loads with tabs in correct order, User Management active by default, and header elements visible', { tag: ["@functional","@regression","@P0","@load-admin-tabs-default-and-header"] }, async ({ page, loginPage, userManagementPage }) => {
+  await test.step('Open — Navigate to Admin URL', async () => {
+    await page.goto('https://qa-atlas.qtsolvdev.com/admin');
+  });
+
+  await test.step('Click — Salesforce login button', async () => {
+    await loginPage.clickLoginWithSalesforce();
+  });
+
+  await test.step('Assert visible — Admin tabs bar', async () => {
+    await userManagementPage.expectAdminTabUsersVisible();
+  });
+
+  await test.step("Assert text — Tab 1 label is 'User Management'", async () => {
+    await userManagementPage.expectAdminTabUsersText('User Management');
+  });
+
+  await test.step("Assert text — Tab 2 label is 'Roles & Access'", async () => {
+    await userManagementPage.expectAdminTabRbacText('Roles & Access');
+  });
+
+  await test.step("Assert text — Tab 3 label is 'Audit Log'", async () => {
+    await userManagementPage.expectAdminTabAuditText('Audit Log');
+  });
+
+  await test.step('Assert visible — User Management view (table container)', async () => {
+    await userManagementPage.expectUsersVisible();
+  });
+
+  await test.step('Assert visible — N Users count label', async () => {
+    await userManagementPage.expectUsersVisible();
+  });
+
+  await test.step('Assert visible — Search user input', async () => {
+    await userManagementPage.expectUsersSearchVisible();
+  });
+
+  await test.step('Assert text — Invite user button text', async () => {
+    await userManagementPage.expectInviteUserText('Invite user');
+  });
+});

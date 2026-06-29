@@ -1,0 +1,62 @@
+{
+  "id": "user-info-avatar-initials-from-name",
+  "testPlanId": "06c435b6-0c9d-4175-938c-8fbb344a0a0c",
+  "requirementId": "0bde0038-d6bb-4e5a-b08a-0925b55e4c88",
+  "suiteName": "Admin — User Management — Functional Happy Paths",
+  "case": {
+    "id": "user-info-avatar-initials-from-name",
+    "title": "User information cell falls back to initials when no photo (name available)",
+    "priority": "P1",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [
+      "Test data: user 'Jane Doe' with email 'jane.doe@example.com' and no photo exists (initials JD)"
+    ],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to Admin URL",
+        "value": "https://qa-atlas.qtsolvdev.com/admin"
+      },
+      {
+        "id": "s2",
+        "action": "tap",
+        "targetDescription": "Salesforce login button",
+        "locatorHint": "text=Salesforce login"
+      },
+      {
+        "id": "s3",
+        "action": "fill",
+        "targetDescription": "Search 'Jane Doe'",
+        "locatorHint": "input[placeholder='Search user']",
+        "value": "Jane Doe"
+      },
+      {
+        "id": "s4",
+        "action": "waitForVisible",
+        "targetDescription": "First matching row",
+        "locatorHint": "[data-testid='users-table'] tbody tr:first-child"
+      },
+      {
+        "id": "s5",
+        "action": "assertText",
+        "targetDescription": "Avatar initials are JD",
+        "locatorHint": "[data-testid='users-table'] tbody tr:first-child td:nth-child(1) [data-testid='avatar-initials']",
+        "assertion": "JD"
+      },
+      {
+        "id": "s6",
+        "action": "assertContainsText",
+        "targetDescription": "Name and email visible",
+        "locatorHint": "[data-testid='users-table'] tbody tr:first-child td:nth-child(1)",
+        "assertion": "jane.doe@example.com"
+      }
+    ],
+    "tags": [
+      "@functional",
+      "@regression"
+    ]
+  }
+}

@@ -1,0 +1,1424 @@
+{
+  "id": "06c435b6-0c9d-4175-938c-8fbb344a0a0c",
+  "requirementId": "0bde0038-d6bb-4e5a-b08a-0925b55e4c88",
+  "model": "gpt-5",
+  "createdAt": "2026-06-29T13:26:49.676Z",
+  "plan": {
+    "version": 1,
+    "suiteName": "Admin — User Management — Functional Happy Paths",
+    "cases": [
+      {
+        "id": "load-admin-tabs-default-and-header",
+        "title": "Admin page loads with tabs in correct order, User Management active by default, and header elements visible",
+        "priority": "P0",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to Admin URL",
+            "value": "https://qa-atlas.qtsolvdev.com/admin"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Salesforce login button",
+            "locatorHint": "text=Salesforce login"
+          },
+          {
+            "id": "s3",
+            "action": "waitForVisible",
+            "targetDescription": "Admin tabs bar",
+            "locatorHint": "#admin-tabs"
+          },
+          {
+            "id": "s4",
+            "action": "assertText",
+            "targetDescription": "Tab 1 label is 'User Management'",
+            "locatorHint": "#admin-tabs li:nth-child(1)",
+            "assertion": "User Management"
+          },
+          {
+            "id": "s5",
+            "action": "assertText",
+            "targetDescription": "Tab 2 label is 'Roles & Access'",
+            "locatorHint": "#admin-tabs li:nth-child(2)",
+            "assertion": "Roles & Access"
+          },
+          {
+            "id": "s6",
+            "action": "assertText",
+            "targetDescription": "Tab 3 label is 'Audit Log'",
+            "locatorHint": "#admin-tabs li:nth-child(3)",
+            "assertion": "Audit Log"
+          },
+          {
+            "id": "s7",
+            "action": "assertVisible",
+            "targetDescription": "User Management view (table container)",
+            "locatorHint": "[data-testid='user-management-view']"
+          },
+          {
+            "id": "s8",
+            "action": "assertVisible",
+            "targetDescription": "N Users count label",
+            "locatorHint": "[data-testid='users-count']"
+          },
+          {
+            "id": "s9",
+            "action": "assertVisible",
+            "targetDescription": "Search user input",
+            "locatorHint": "input[placeholder='Search user']"
+          },
+          {
+            "id": "s10",
+            "action": "assertText",
+            "targetDescription": "Invite user button text",
+            "locatorHint": "[data-testid='invite-user-btn']",
+            "assertion": "Invite user"
+          }
+        ],
+        "tags": [
+          "@functional",
+          "@regression"
+        ]
+      },
+      {
+        "id": "user-table-columns-order",
+        "title": "User table renders exactly five columns in the correct order",
+        "priority": "P0",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to Admin URL",
+            "value": "https://qa-atlas.qtsolvdev.com/admin"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Salesforce login button",
+            "locatorHint": "text=Salesforce login"
+          },
+          {
+            "id": "s3",
+            "action": "waitForVisible",
+            "targetDescription": "User table",
+            "locatorHint": "[data-testid='users-table']"
+          },
+          {
+            "id": "s4",
+            "action": "assertCount",
+            "targetDescription": "Header columns count",
+            "locatorHint": "[data-testid='users-table'] thead th"
+          },
+          {
+            "id": "s5",
+            "action": "assertText",
+            "targetDescription": "Column 1: User information",
+            "locatorHint": "[data-testid='users-table'] thead th:nth-child(1)",
+            "assertion": "User information"
+          },
+          {
+            "id": "s6",
+            "action": "assertText",
+            "targetDescription": "Column 2: Role",
+            "locatorHint": "[data-testid='users-table'] thead th:nth-child(2)",
+            "assertion": "Role"
+          },
+          {
+            "id": "s7",
+            "action": "assertText",
+            "targetDescription": "Column 3: Status",
+            "locatorHint": "[data-testid='users-table'] thead th:nth-child(3)",
+            "assertion": "Status"
+          },
+          {
+            "id": "s8",
+            "action": "assertText",
+            "targetDescription": "Column 4: Last active",
+            "locatorHint": "[data-testid='users-table'] thead th:nth-child(4)",
+            "assertion": "Last active"
+          },
+          {
+            "id": "s9",
+            "action": "assertText",
+            "targetDescription": "Column 5: Account Access",
+            "locatorHint": "[data-testid='users-table'] thead th:nth-child(5)",
+            "assertion": "Account Access"
+          }
+        ],
+        "tags": [
+          "@functional",
+          "@regression"
+        ]
+      },
+      {
+        "id": "user-info-avatar-photo",
+        "title": "User information cell shows SSO profile photo when available",
+        "priority": "P1",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [
+          "Test data: user 'PhotoUser One' with SSO photo exists"
+        ],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to Admin URL",
+            "value": "https://qa-atlas.qtsolvdev.com/admin"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Salesforce login button",
+            "locatorHint": "text=Salesforce login"
+          },
+          {
+            "id": "s3",
+            "action": "fill",
+            "targetDescription": "Search 'PhotoUser One'",
+            "locatorHint": "input[placeholder='Search user']",
+            "value": "PhotoUser One"
+          },
+          {
+            "id": "s4",
+            "action": "waitForVisible",
+            "targetDescription": "First matching row",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child"
+          },
+          {
+            "id": "s5",
+            "action": "assertVisible",
+            "targetDescription": "Avatar image in User information cell",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child td:nth-child(1) [data-testid='avatar-img']"
+          },
+          {
+            "id": "s6",
+            "action": "assertContainsText",
+            "targetDescription": "Name visible in cell",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child td:nth-child(1)",
+            "assertion": "PhotoUser One"
+          }
+        ],
+        "tags": [
+          "@functional",
+          "@regression"
+        ]
+      },
+      {
+        "id": "user-info-avatar-initials-from-name",
+        "title": "User information cell falls back to initials when no photo (name available)",
+        "priority": "P1",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [
+          "Test data: user 'Jane Doe' with email 'jane.doe@example.com' and no photo exists (initials JD)"
+        ],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to Admin URL",
+            "value": "https://qa-atlas.qtsolvdev.com/admin"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Salesforce login button",
+            "locatorHint": "text=Salesforce login"
+          },
+          {
+            "id": "s3",
+            "action": "fill",
+            "targetDescription": "Search 'Jane Doe'",
+            "locatorHint": "input[placeholder='Search user']",
+            "value": "Jane Doe"
+          },
+          {
+            "id": "s4",
+            "action": "waitForVisible",
+            "targetDescription": "First matching row",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child"
+          },
+          {
+            "id": "s5",
+            "action": "assertText",
+            "targetDescription": "Avatar initials are JD",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child td:nth-child(1) [data-testid='avatar-initials']",
+            "assertion": "JD"
+          },
+          {
+            "id": "s6",
+            "action": "assertContainsText",
+            "targetDescription": "Name and email visible",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child td:nth-child(1)",
+            "assertion": "jane.doe@example.com"
+          }
+        ],
+        "tags": [
+          "@functional",
+          "@regression"
+        ]
+      },
+      {
+        "id": "user-info-email-only",
+        "title": "User information cell for email-only account shows email on first line and initials from email prefix",
+        "priority": "P1",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [
+          "Test data: email-only user 'lonely.user@example.com' exists; no first/last name; expected initials 'LU'"
+        ],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to Admin URL",
+            "value": "https://qa-atlas.qtsolvdev.com/admin"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Salesforce login button",
+            "locatorHint": "text=Salesforce login"
+          },
+          {
+            "id": "s3",
+            "action": "fill",
+            "targetDescription": "Search email-only user",
+            "locatorHint": "input[placeholder='Search user']",
+            "value": "lonely.user@example.com"
+          },
+          {
+            "id": "s4",
+            "action": "waitForVisible",
+            "targetDescription": "Matching row",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child"
+          },
+          {
+            "id": "s5",
+            "action": "assertText",
+            "targetDescription": "Primary line shows email only",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child td:nth-child(1) [data-testid='user-primary']",
+            "assertion": "lonely.user@example.com"
+          },
+          {
+            "id": "s6",
+            "action": "assertHidden",
+            "targetDescription": "No secondary line (no name)",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child td:nth-child(1) [data-testid='user-secondary']"
+          },
+          {
+            "id": "s7",
+            "action": "assertText",
+            "targetDescription": "Avatar initials from email prefix are LU",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child td:nth-child(1) [data-testid='avatar-initials']",
+            "assertion": "LU"
+          }
+        ],
+        "tags": [
+          "@functional",
+          "@regression"
+        ]
+      },
+      {
+        "id": "role-cell-plain-text",
+        "title": "Role cell displays plain text role label (e.g., Finance)",
+        "priority": "P2",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [
+          "Test data: user 'Finance Person' exists with role 'Finance'"
+        ],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to Admin URL",
+            "value": "https://qa-atlas.qtsolvdev.com/admin"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Salesforce login button",
+            "locatorHint": "text=Salesforce login"
+          },
+          {
+            "id": "s3",
+            "action": "fill",
+            "targetDescription": "Search 'Finance Person'",
+            "locatorHint": "input[placeholder='Search user']",
+            "value": "Finance Person"
+          },
+          {
+            "id": "s4",
+            "action": "waitForVisible",
+            "targetDescription": "Matching row",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child"
+          },
+          {
+            "id": "s5",
+            "action": "assertText",
+            "targetDescription": "Role cell shows 'Finance'",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child td:nth-child(2)",
+            "assertion": "Finance"
+          }
+        ],
+        "tags": [
+          "@functional",
+          "@regression"
+        ]
+      },
+      {
+        "id": "status-badge-active-inactive",
+        "title": "Status cell shows 'Active' or 'Inactive' badge as appropriate",
+        "priority": "P2",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [
+          "Test data: 'Active Person' (active) and 'Inactive Person' (inactive) users exist"
+        ],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to Admin URL",
+            "value": "https://qa-atlas.qtsolvdev.com/admin"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Salesforce login button",
+            "locatorHint": "text=Salesforce login"
+          },
+          {
+            "id": "s3",
+            "action": "fill",
+            "targetDescription": "Search 'Active Person'",
+            "locatorHint": "input[placeholder='Search user']",
+            "value": "Active Person"
+          },
+          {
+            "id": "s4",
+            "action": "waitForVisible",
+            "targetDescription": "Active user row",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child"
+          },
+          {
+            "id": "s5",
+            "action": "assertText",
+            "targetDescription": "Status badge shows Active",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child td:nth-child(3)",
+            "assertion": "Active"
+          },
+          {
+            "id": "s6",
+            "action": "clear",
+            "targetDescription": "Clear search input",
+            "locatorHint": "input[placeholder='Search user']"
+          },
+          {
+            "id": "s7",
+            "action": "fill",
+            "targetDescription": "Search 'Inactive Person'",
+            "locatorHint": "input[placeholder='Search user']",
+            "value": "Inactive Person"
+          },
+          {
+            "id": "s8",
+            "action": "waitForVisible",
+            "targetDescription": "Inactive user row",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child"
+          },
+          {
+            "id": "s9",
+            "action": "assertText",
+            "targetDescription": "Status badge shows Inactive",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child td:nth-child(3)",
+            "assertion": "Inactive"
+          }
+        ],
+        "tags": [
+          "@functional",
+          "@regression"
+        ]
+      },
+      {
+        "id": "last-active-relative-time",
+        "title": "Last active shows relative time string for users who have logged in",
+        "priority": "P2",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [
+          "Test data: user 'Recent User' has logged in previously (Last active should be relative, e.g., 'X days ago')"
+        ],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to Admin URL",
+            "value": "https://qa-atlas.qtsolvdev.com/admin"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Salesforce login button",
+            "locatorHint": "text=Salesforce login"
+          },
+          {
+            "id": "s3",
+            "action": "fill",
+            "targetDescription": "Search 'Recent User'",
+            "locatorHint": "input[placeholder='Search user']",
+            "value": "Recent User"
+          },
+          {
+            "id": "s4",
+            "action": "waitForVisible",
+            "targetDescription": "Recent User row",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child"
+          },
+          {
+            "id": "s5",
+            "action": "assertContainsText",
+            "targetDescription": "Last active cell contains 'ago'",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child td:nth-child(4)",
+            "assertion": "ago"
+          }
+        ],
+        "tags": [
+          "@functional",
+          "@regression"
+        ]
+      },
+      {
+        "id": "last-active-never",
+        "title": "Last active shows 'Never' for users who have never logged in",
+        "priority": "P2",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [
+          "Test data: user 'Never User' has never logged in"
+        ],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to Admin URL",
+            "value": "https://qa-atlas.qtsolvdev.com/admin"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Salesforce login button",
+            "locatorHint": "text=Salesforce login"
+          },
+          {
+            "id": "s3",
+            "action": "fill",
+            "targetDescription": "Search 'Never User'",
+            "locatorHint": "input[placeholder='Search user']",
+            "value": "Never User"
+          },
+          {
+            "id": "s4",
+            "action": "waitForVisible",
+            "targetDescription": "Never User row",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child"
+          },
+          {
+            "id": "s5",
+            "action": "assertText",
+            "targetDescription": "Last active cell shows 'Never'",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child td:nth-child(4)",
+            "assertion": "Never"
+          }
+        ],
+        "tags": [
+          "@functional",
+          "@regression"
+        ]
+      },
+      {
+        "id": "revoke-access-confirm",
+        "title": "Revoke access from ON toggle prompts confirmation and sets toggle OFF upon confirm",
+        "priority": "P0",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [
+          "Test data: active user 'Revoke Target' exists with Account Access toggle ON and is not the logged-in admin"
+        ],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to Admin URL",
+            "value": "https://qa-atlas.qtsolvdev.com/admin"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Salesforce login button",
+            "locatorHint": "text=Salesforce login"
+          },
+          {
+            "id": "s3",
+            "action": "fill",
+            "targetDescription": "Search 'Revoke Target'",
+            "locatorHint": "input[placeholder='Search user']",
+            "value": "Revoke Target"
+          },
+          {
+            "id": "s4",
+            "action": "waitForVisible",
+            "targetDescription": "Revoke Target row",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child"
+          },
+          {
+            "id": "s5",
+            "action": "assertChecked",
+            "targetDescription": "Access toggle is ON before revocation",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child [data-testid='access-toggle'] input[type='checkbox']"
+          },
+          {
+            "id": "s6",
+            "action": "tap",
+            "targetDescription": "Click ON toggle",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child [data-testid='access-toggle']"
+          },
+          {
+            "id": "s7",
+            "action": "waitForVisible",
+            "targetDescription": "Confirmation dialog",
+            "locatorHint": "[data-testid='revoke-access-dialog']"
+          },
+          {
+            "id": "s8",
+            "action": "assertText",
+            "targetDescription": "Dialog title",
+            "locatorHint": "[data-testid='revoke-access-dialog'] [data-testid='dialog-title']",
+            "assertion": "Revoke access?"
+          },
+          {
+            "id": "s9",
+            "action": "assertContainsText",
+            "targetDescription": "Dialog message includes user name",
+            "locatorHint": "[data-testid='revoke-access-dialog'] [data-testid='dialog-message']",
+            "assertion": "This will prevent Revoke Target from accessing the portal."
+          },
+          {
+            "id": "s10",
+            "action": "tap",
+            "targetDescription": "Confirm Revoke",
+            "locatorHint": "[data-testid='revoke-access-dialog'] button:has-text('Revoke')"
+          },
+          {
+            "id": "s11",
+            "action": "waitForHidden",
+            "targetDescription": "Dialog closes",
+            "locatorHint": "[data-testid='revoke-access-dialog']"
+          },
+          {
+            "id": "s12",
+            "action": "assertUnchecked",
+            "targetDescription": "Access toggle is OFF after revocation",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child [data-testid='access-toggle'] input[type='checkbox']"
+          }
+        ],
+        "tags": [
+          "@functional",
+          "@regression"
+        ]
+      },
+      {
+        "id": "revoke-access-cancel",
+        "title": "Cancel revoking access leaves ON toggle unchanged",
+        "priority": "P0",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [
+          "Test data: active user 'Cancel Target' exists with Account Access toggle ON and is not the logged-in admin"
+        ],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to Admin URL",
+            "value": "https://qa-atlas.qtsolvdev.com/admin"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Salesforce login button",
+            "locatorHint": "text=Salesforce login"
+          },
+          {
+            "id": "s3",
+            "action": "fill",
+            "targetDescription": "Search 'Cancel Target'",
+            "locatorHint": "input[placeholder='Search user']",
+            "value": "Cancel Target"
+          },
+          {
+            "id": "s4",
+            "action": "waitForVisible",
+            "targetDescription": "Cancel Target row",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child"
+          },
+          {
+            "id": "s5",
+            "action": "assertChecked",
+            "targetDescription": "Access toggle is ON before",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child [data-testid='access-toggle'] input[type='checkbox']"
+          },
+          {
+            "id": "s6",
+            "action": "tap",
+            "targetDescription": "Click ON toggle",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child [data-testid='access-toggle']"
+          },
+          {
+            "id": "s7",
+            "action": "waitForVisible",
+            "targetDescription": "Confirmation dialog",
+            "locatorHint": "[data-testid='revoke-access-dialog']"
+          },
+          {
+            "id": "s8",
+            "action": "tap",
+            "targetDescription": "Click Cancel",
+            "locatorHint": "[data-testid='revoke-access-dialog'] button:has-text('Cancel')"
+          },
+          {
+            "id": "s9",
+            "action": "waitForHidden",
+            "targetDescription": "Dialog closes",
+            "locatorHint": "[data-testid='revoke-access-dialog']"
+          },
+          {
+            "id": "s10",
+            "action": "assertChecked",
+            "targetDescription": "Access toggle remains ON",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child [data-testid='access-toggle'] input[type='checkbox']"
+          }
+        ],
+        "tags": [
+          "@functional",
+          "@regression"
+        ]
+      },
+      {
+        "id": "reenable-access-from-off",
+        "title": "Re-enable access from OFF toggle without confirmation",
+        "priority": "P0",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [
+          "Test data: user 'Revoked Target' exists with Account Access toggle OFF (previously active)"
+        ],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to Admin URL",
+            "value": "https://qa-atlas.qtsolvdev.com/admin"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Salesforce login button",
+            "locatorHint": "text=Salesforce login"
+          },
+          {
+            "id": "s3",
+            "action": "fill",
+            "targetDescription": "Search 'Revoked Target'",
+            "locatorHint": "input[placeholder='Search user']",
+            "value": "Revoked Target"
+          },
+          {
+            "id": "s4",
+            "action": "waitForVisible",
+            "targetDescription": "Revoked Target row",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child"
+          },
+          {
+            "id": "s5",
+            "action": "assertUnchecked",
+            "targetDescription": "Access toggle is OFF before",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child [data-testid='access-toggle'] input[type='checkbox']"
+          },
+          {
+            "id": "s6",
+            "action": "tap",
+            "targetDescription": "Click OFF toggle to enable",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child [data-testid='access-toggle']"
+          },
+          {
+            "id": "s7",
+            "action": "wait",
+            "targetDescription": "Small wait for immediate state change",
+            "value": "500"
+          },
+          {
+            "id": "s8",
+            "action": "assertChecked",
+            "targetDescription": "Access toggle is ON after enabling",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child [data-testid='access-toggle'] input[type='checkbox']"
+          }
+        ],
+        "tags": [
+          "@functional",
+          "@regression"
+        ]
+      },
+      {
+        "id": "admin-own-row-protected",
+        "title": "Admin's own row has disabled toggle and shows tooltip on hover",
+        "priority": "P0",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [
+          "Test data: Logged-in admin email is known (e.g., admin.qa@example.com); admin row is present in table"
+        ],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to Admin URL",
+            "value": "https://qa-atlas.qtsolvdev.com/admin"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Salesforce login button",
+            "locatorHint": "text=Salesforce login"
+          },
+          {
+            "id": "s3",
+            "action": "fill",
+            "targetDescription": "Search current admin email",
+            "locatorHint": "input[placeholder='Search user']",
+            "value": "admin.qa@example.com"
+          },
+          {
+            "id": "s4",
+            "action": "waitForVisible",
+            "targetDescription": "Admin's own row",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child"
+          },
+          {
+            "id": "s5",
+            "action": "assertDisabled",
+            "targetDescription": "Admin's Access toggle is disabled",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child [data-testid='access-toggle'] input[type='checkbox']"
+          },
+          {
+            "id": "s6",
+            "action": "hover",
+            "targetDescription": "Hover over disabled toggle",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child [data-testid='access-toggle']"
+          },
+          {
+            "id": "s7",
+            "action": "assertVisible",
+            "targetDescription": "Tooltip visible",
+            "locatorHint": "[data-testid='tooltip']"
+          },
+          {
+            "id": "s8",
+            "action": "assertText",
+            "targetDescription": "Tooltip text",
+            "locatorHint": "[data-testid='tooltip']",
+            "assertion": "You cannot revoke your own access."
+          }
+        ],
+        "tags": [
+          "@functional",
+          "@regression"
+        ]
+      },
+      {
+        "id": "search-by-name-case-insensitive",
+        "title": "Search by name filters table in real time (case-insensitive, partial match)",
+        "priority": "P0",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [
+          "Test data: user 'TestUserInvite1' exists in org"
+        ],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to Admin URL",
+            "value": "https://qa-atlas.qtsolvdev.com/admin"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Salesforce login button",
+            "locatorHint": "text=Salesforce login"
+          },
+          {
+            "id": "s3",
+            "action": "clear",
+            "targetDescription": "Clear search input",
+            "locatorHint": "input[placeholder='Search user']"
+          },
+          {
+            "id": "s4",
+            "action": "typeText",
+            "targetDescription": "Type lowercase query 'testuserinvite1'",
+            "locatorHint": "input[placeholder='Search user']",
+            "value": "testuserinvite1"
+          },
+          {
+            "id": "s5",
+            "action": "waitForVisible",
+            "targetDescription": "First filtered row appears",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child"
+          },
+          {
+            "id": "s6",
+            "action": "assertContainsText",
+            "targetDescription": "Row contains query in name or email",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child",
+            "assertion": "testuserinvite1"
+          }
+        ],
+        "tags": [
+          "@functional",
+          "@regression"
+        ]
+      },
+      {
+        "id": "search-by-email-partial-case-insensitive",
+        "title": "Search by email partial string matches case-insensitively",
+        "priority": "P1",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [
+          "Test data: user with email 'finance.lead@example.com' exists"
+        ],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to Admin URL",
+            "value": "https://qa-atlas.qtsolvdev.com/admin"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Salesforce login button",
+            "locatorHint": "text=Salesforce login"
+          },
+          {
+            "id": "s3",
+            "action": "clear",
+            "targetDescription": "Clear search input",
+            "locatorHint": "input[placeholder='Search user']"
+          },
+          {
+            "id": "s4",
+            "action": "typeText",
+            "targetDescription": "Type uppercase partial 'FINANCE.'",
+            "locatorHint": "input[placeholder='Search user']",
+            "value": "FINANCE."
+          },
+          {
+            "id": "s5",
+            "action": "waitForVisible",
+            "targetDescription": "Filtered row appears",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child"
+          },
+          {
+            "id": "s6",
+            "action": "assertContainsText",
+            "targetDescription": "Row contains matching email",
+            "locatorHint": "[data-testid='users-table'] tbody tr:first-child",
+            "assertion": "finance.lead@example.com"
+          }
+        ],
+        "tags": [
+          "@functional",
+          "@regression"
+        ]
+      },
+      {
+        "id": "search-no-results-message",
+        "title": "Search with no results shows 'No users found for [query]' while header remains",
+        "priority": "P0",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to Admin URL",
+            "value": "https://qa-atlas.qtsolvdev.com/admin"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Salesforce login button",
+            "locatorHint": "text=Salesforce login"
+          },
+          {
+            "id": "s3",
+            "action": "clear",
+            "targetDescription": "Clear search input",
+            "locatorHint": "input[placeholder='Search user']"
+          },
+          {
+            "id": "s4",
+            "action": "typeText",
+            "targetDescription": "Type no-match query",
+            "locatorHint": "input[placeholder='Search user']",
+            "value": "zzznomatch"
+          },
+          {
+            "id": "s5",
+            "action": "waitForVisible",
+            "targetDescription": "Empty state message",
+            "locatorHint": "[data-testid='users-empty-state']"
+          },
+          {
+            "id": "s6",
+            "action": "assertText",
+            "targetDescription": "Message shows query",
+            "locatorHint": "[data-testid='users-empty-state']",
+            "assertion": "No users found for 'zzznomatch'."
+          },
+          {
+            "id": "s7",
+            "action": "assertVisible",
+            "targetDescription": "Table header row remains visible",
+            "locatorHint": "[data-testid='users-table'] thead"
+          }
+        ],
+        "tags": [
+          "@functional",
+          "@regression"
+        ]
+      },
+      {
+        "id": "count-label-unchanged-during-filter",
+        "title": "N Users count label does not change when filtering",
+        "priority": "P1",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [
+          "Org total users is known and fixed at 21"
+        ],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to Admin URL",
+            "value": "https://qa-atlas.qtsolvdev.com/admin"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Salesforce login button",
+            "locatorHint": "text=Salesforce login"
+          },
+          {
+            "id": "s3",
+            "action": "waitForVisible",
+            "targetDescription": "Users count label",
+            "locatorHint": "[data-testid='users-count']"
+          },
+          {
+            "id": "s4",
+            "action": "assertText",
+            "targetDescription": "Initial count label shows '21 Users'",
+            "locatorHint": "[data-testid='users-count']",
+            "assertion": "21 Users"
+          },
+          {
+            "id": "s5",
+            "action": "typeText",
+            "targetDescription": "Apply no-result filter",
+            "locatorHint": "input[placeholder='Search user']",
+            "value": "zzznomatch"
+          },
+          {
+            "id": "s6",
+            "action": "waitForVisible",
+            "targetDescription": "Empty state message",
+            "locatorHint": "[data-testid='users-empty-state']"
+          },
+          {
+            "id": "s7",
+            "action": "assertText",
+            "targetDescription": "Count label remains '21 Users'",
+            "locatorHint": "[data-testid='users-count']",
+            "assertion": "21 Users"
+          }
+        ],
+        "tags": [
+          "@functional",
+          "@regression"
+        ]
+      },
+      {
+        "id": "switch-tabs-roles-access-and-back",
+        "title": "Switching between 'User Management' and 'Roles & Access' updates views",
+        "priority": "P1",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to Admin URL",
+            "value": "https://qa-atlas.qtsolvdev.com/admin"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Salesforce login button",
+            "locatorHint": "text=Salesforce login"
+          },
+          {
+            "id": "s3",
+            "action": "waitForVisible",
+            "targetDescription": "User Management view visible",
+            "locatorHint": "[data-testid='user-management-view']"
+          },
+          {
+            "id": "s4",
+            "action": "tap",
+            "targetDescription": "Click Roles & Access tab",
+            "locatorHint": "#admin-tabs li:has-text('Roles & Access')"
+          },
+          {
+            "id": "s5",
+            "action": "waitForVisible",
+            "targetDescription": "Roles & Access view",
+            "locatorHint": "[data-testid='roles-access-view']"
+          },
+          {
+            "id": "s6",
+            "action": "tap",
+            "targetDescription": "Click User Management tab",
+            "locatorHint": "#admin-tabs li:has-text('User Management')"
+          },
+          {
+            "id": "s7",
+            "action": "waitForVisible",
+            "targetDescription": "User Management view returns",
+            "locatorHint": "[data-testid='user-management-view']"
+          }
+        ],
+        "tags": [
+          "@functional",
+          "@regression"
+        ]
+      },
+      {
+        "id": "pagination-more-than-20-users",
+        "title": "Pagination shows 20 rows per page and Next/Previous controls when total users > 20",
+        "priority": "P0",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [
+          "Org has more than 20 users (e.g., 42)"
+        ],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to Admin URL",
+            "value": "https://qa-atlas.qtsolvdev.com/admin"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Salesforce login button",
+            "locatorHint": "text=Salesforce login"
+          },
+          {
+            "id": "s3",
+            "action": "waitForVisible",
+            "targetDescription": "User table",
+            "locatorHint": "[data-testid='users-table']"
+          },
+          {
+            "id": "s4",
+            "action": "assertCount",
+            "targetDescription": "Page 1 shows 20 rows",
+            "locatorHint": "[data-testid='users-table'] tbody tr"
+          },
+          {
+            "id": "s5",
+            "action": "assertVisible",
+            "targetDescription": "Pagination controls visible",
+            "locatorHint": "[data-testid='pagination']"
+          },
+          {
+            "id": "s6",
+            "action": "tap",
+            "targetDescription": "Click Next page",
+            "locatorHint": "[data-testid='pagination'] button:has-text('Next')"
+          },
+          {
+            "id": "s7",
+            "action": "wait",
+            "targetDescription": "Wait for page change",
+            "value": "500"
+          },
+          {
+            "id": "s8",
+            "action": "assertVisible",
+            "targetDescription": "Previous button active",
+            "locatorHint": "[data-testid='pagination'] button:has-text('Previous')"
+          },
+          {
+            "id": "s9",
+            "action": "assertVisible",
+            "targetDescription": "Current page is 2 (aria-current)",
+            "locatorHint": "[data-testid='pagination'] [aria-current='page']"
+          }
+        ],
+        "tags": [
+          "@functional",
+          "@regression"
+        ]
+      },
+      {
+        "id": "pagination-resets-to-page-1-on-search",
+        "title": "Changing search query resets pagination to page 1",
+        "priority": "P1",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [
+          "Org has more than 20 users; at least two pages of results"
+        ],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to Admin URL",
+            "value": "https://qa-atlas.qtsolvdev.com/admin"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Salesforce login button",
+            "locatorHint": "text=Salesforce login"
+          },
+          {
+            "id": "s3",
+            "action": "tap",
+            "targetDescription": "Go to Next page",
+            "locatorHint": "[data-testid='pagination'] button:has-text('Next')"
+          },
+          {
+            "id": "s4",
+            "action": "wait",
+            "targetDescription": "Wait for page 2",
+            "value": "500"
+          },
+          {
+            "id": "s5",
+            "action": "typeText",
+            "targetDescription": "Type a new character into search",
+            "locatorHint": "input[placeholder='Search user']",
+            "value": "a"
+          },
+          {
+            "id": "s6",
+            "action": "wait",
+            "targetDescription": "Wait for filter to apply",
+            "value": "500"
+          },
+          {
+            "id": "s7",
+            "action": "assertText",
+            "targetDescription": "Active page is 1",
+            "locatorHint": "[data-testid='pagination'] [aria-current='page']",
+            "assertion": "1"
+          }
+        ],
+        "tags": [
+          "@functional",
+          "@regression"
+        ]
+      },
+      {
+        "id": "pagination-exactly-20-no-controls",
+        "title": "Exactly 20 users show no pagination controls",
+        "priority": "P2",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [
+          "Org has exactly 20 users"
+        ],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to Admin URL",
+            "value": "https://qa-atlas.qtsolvdev.com/admin?org=exact20"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Salesforce login button",
+            "locatorHint": "text=Salesforce login"
+          },
+          {
+            "id": "s3",
+            "action": "waitForVisible",
+            "targetDescription": "User table",
+            "locatorHint": "[data-testid='users-table']"
+          },
+          {
+            "id": "s4",
+            "action": "assertCount",
+            "targetDescription": "Table shows 20 rows",
+            "locatorHint": "[data-testid='users-table'] tbody tr"
+          },
+          {
+            "id": "s5",
+            "action": "assertHidden",
+            "targetDescription": "Pagination controls not shown",
+            "locatorHint": "[data-testid='pagination']"
+          }
+        ],
+        "tags": [
+          "@functional",
+          "@regression"
+        ]
+      },
+      {
+        "id": "pagination-exactly-21-controls-appear",
+        "title": "Exactly 21 users show pagination controls and 20 rows on page 1",
+        "priority": "P2",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [
+          "Org has exactly 21 users"
+        ],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to Admin URL (21 users org)",
+            "value": "https://qa-atlas.qtsolvdev.com/admin?org=exact21"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Salesforce login button",
+            "locatorHint": "text=Salesforce login"
+          },
+          {
+            "id": "s3",
+            "action": "waitForVisible",
+            "targetDescription": "User table",
+            "locatorHint": "[data-testid='users-table']"
+          },
+          {
+            "id": "s4",
+            "action": "assertVisible",
+            "targetDescription": "Pagination controls visible",
+            "locatorHint": "[data-testid='pagination']"
+          },
+          {
+            "id": "s5",
+            "action": "assertCount",
+            "targetDescription": "Page 1 shows 20 rows",
+            "locatorHint": "[data-testid='users-table'] tbody tr"
+          }
+        ],
+        "tags": [
+          "@functional",
+          "@regression"
+        ]
+      },
+      {
+        "id": "table-scrollable-overflow",
+        "title": "User table is scrollable when content exceeds viewport",
+        "priority": "P2",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [
+          "Org has >20 users; table height exceeds viewport height"
+        ],
+        "steps": [
+          {
+            "id": "s1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to Admin URL",
+            "value": "https://qa-atlas.qtsolvdev.com/admin"
+          },
+          {
+            "id": "s2",
+            "action": "tap",
+            "targetDescription": "Salesforce login button",
+            "locatorHint": "text=Salesforce login"
+          },
+          {
+            "id": "s3",
+            "action": "waitForVisible",
+            "targetDescription": "User table",
+            "locatorHint": "[data-testid='users-table']"
+          },
+          {
+            "id": "s4",
+            "action": "scrollIntoView",
+            "targetDescription": "Scroll to last row on page (row 20)",
+            "locatorHint": "[data-testid='users-table'] tbody tr:nth-child(20)"
+          },
+          {
+            "id": "s5",
+            "action": "assertVisible",
+            "targetDescription": "Row 20 visible after scroll",
+            "locatorHint": "[data-testid='users-table'] tbody tr:nth-child(20)"
+          }
+        ],
+        "tags": [
+          "@functional",
+          "@regression"
+        ]
+      }
+    ]
+  }
+}
