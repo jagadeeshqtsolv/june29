@@ -1,0 +1,119 @@
+{
+  "id": "view-user-management",
+  "testPlanId": "c167edf3-bad2-4e44-b2b4-cb44aef0377d",
+  "requirementId": "abff637f-7479-467c-8793-743af5876183",
+  "suiteName": "Admin User Management - Smoke",
+  "case": {
+    "id": "view-user-management",
+    "title": "Default User Management view",
+    "priority": "P0",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [],
+    "steps": [
+      {
+        "id": "step1",
+        "action": "openUrl",
+        "targetDescription": "Admin page",
+        "value": "https://qa-atlas.qtsolvdev.com/admin"
+      },
+      {
+        "id": "step2",
+        "action": "tap",
+        "targetDescription": "Salesforce login button",
+        "locatorHint": "text=Salesforce login"
+      },
+      {
+        "id": "step3",
+        "action": "assertVisible",
+        "targetDescription": "User Management tab",
+        "locatorHint": "role=tab[name=\"User Management\"]"
+      },
+      {
+        "id": "step4",
+        "action": "assertChecked",
+        "targetDescription": "User Management tab is active",
+        "locatorHint": "role=tab[name=\"User Management\"]"
+      },
+      {
+        "id": "step5",
+        "action": "assertText",
+        "targetDescription": "First tab label",
+        "locatorHint": "css=div.tabs [role=tab]:nth-child(1)",
+        "assertion": "User Management"
+      },
+      {
+        "id": "step6",
+        "action": "assertText",
+        "targetDescription": "Second tab label",
+        "locatorHint": "css=div.tabs [role=tab]:nth-child(2)",
+        "assertion": "Roles & Access"
+      },
+      {
+        "id": "step7",
+        "action": "assertText",
+        "targetDescription": "Third tab label",
+        "locatorHint": "css=div.tabs [role=tab]:nth-child(3)",
+        "assertion": "Audit Log"
+      },
+      {
+        "id": "step8",
+        "action": "assertVisible",
+        "targetDescription": "Users count label",
+        "locatorHint": "data-testid=users-count"
+      },
+      {
+        "id": "step9",
+        "action": "assertVisible",
+        "targetDescription": "Search user input",
+        "locatorHint": "input[placeholder=\"Search user\"]"
+      },
+      {
+        "id": "step10",
+        "action": "assertVisible",
+        "targetDescription": "Invite user button",
+        "locatorHint": "button:has-text(\"Invite user\")"
+      },
+      {
+        "id": "step11",
+        "action": "assertText",
+        "targetDescription": "User information column header",
+        "locatorHint": "th:nth-child(1)",
+        "assertion": "User information"
+      },
+      {
+        "id": "step12",
+        "action": "assertText",
+        "targetDescription": "Role column header",
+        "locatorHint": "th:nth-child(2)",
+        "assertion": "Role"
+      },
+      {
+        "id": "step13",
+        "action": "assertText",
+        "targetDescription": "Status column header",
+        "locatorHint": "th:nth-child(3)",
+        "assertion": "Status"
+      },
+      {
+        "id": "step14",
+        "action": "assertText",
+        "targetDescription": "Last active column header",
+        "locatorHint": "th:nth-child(4)",
+        "assertion": "Last active"
+      },
+      {
+        "id": "step15",
+        "action": "assertText",
+        "targetDescription": "Account Access column header",
+        "locatorHint": "th:nth-child(5)",
+        "assertion": "Account Access"
+      }
+    ],
+    "tags": [
+      "@smoke",
+      "@regression"
+    ]
+  }
+}

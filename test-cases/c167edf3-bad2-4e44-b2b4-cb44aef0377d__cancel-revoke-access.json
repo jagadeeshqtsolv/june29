@@ -1,0 +1,51 @@
+{
+  "id": "cancel-revoke-access",
+  "testPlanId": "c167edf3-bad2-4e44-b2b4-cb44aef0377d",
+  "requirementId": "abff637f-7479-467c-8793-743af5876183",
+  "suiteName": "Admin User Management - Smoke",
+  "case": {
+    "id": "cancel-revoke-access",
+    "title": "Cancel revocation leaves access toggle unchanged",
+    "priority": "P0",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [],
+    "steps": [
+      {
+        "id": "step1",
+        "action": "openUrl",
+        "targetDescription": "Admin page",
+        "value": "https://qa-atlas.qtsolvdev.com/admin"
+      },
+      {
+        "id": "step2",
+        "action": "tap",
+        "targetDescription": "Salesforce login button",
+        "locatorHint": "text=Salesforce login"
+      },
+      {
+        "id": "step3",
+        "action": "tap",
+        "targetDescription": "Active user access toggle",
+        "locatorHint": "css=tbody tr:first-child .access-toggle input:checked"
+      },
+      {
+        "id": "step4",
+        "action": "tap",
+        "targetDescription": "Cancel button",
+        "locatorHint": "role=button[name=\"Cancel\"]"
+      },
+      {
+        "id": "step5",
+        "action": "assertChecked",
+        "targetDescription": "Access toggle remains on",
+        "locatorHint": "css=tbody tr:first-child .access-toggle input"
+      }
+    ],
+    "tags": [
+      "@smoke",
+      "@regression"
+    ]
+  }
+}

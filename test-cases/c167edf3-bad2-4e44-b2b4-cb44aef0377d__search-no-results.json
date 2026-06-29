@@ -1,0 +1,47 @@
+{
+  "id": "search-no-results",
+  "testPlanId": "c167edf3-bad2-4e44-b2b4-cb44aef0377d",
+  "requirementId": "abff637f-7479-467c-8793-743af5876183",
+  "suiteName": "Admin User Management - Smoke",
+  "case": {
+    "id": "search-no-results",
+    "title": "Search shows no users found message for no matches",
+    "priority": "P0",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [],
+    "steps": [
+      {
+        "id": "step1",
+        "action": "openUrl",
+        "targetDescription": "Admin page",
+        "value": "https://qa-atlas.qtsolvdev.com/admin"
+      },
+      {
+        "id": "step2",
+        "action": "tap",
+        "targetDescription": "Salesforce login button",
+        "locatorHint": "text=Salesforce login"
+      },
+      {
+        "id": "step3",
+        "action": "fill",
+        "targetDescription": "Search user input",
+        "locatorHint": "input[placeholder=\"Search user\"]",
+        "value": "zzznomatch"
+      },
+      {
+        "id": "step4",
+        "action": "assertVisible",
+        "targetDescription": "No users found message",
+        "locatorHint": "table tbody",
+        "assertion": "No users found for 'zzznomatch'."
+      }
+    ],
+    "tags": [
+      "@smoke",
+      "@regression"
+    ]
+  }
+}

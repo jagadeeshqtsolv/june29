@@ -1,0 +1,57 @@
+{
+  "id": "switch-tabs",
+  "testPlanId": "c167edf3-bad2-4e44-b2b4-cb44aef0377d",
+  "requirementId": "abff637f-7479-467c-8793-743af5876183",
+  "suiteName": "Admin User Management - Smoke",
+  "case": {
+    "id": "switch-tabs",
+    "title": "Switch between User Management and Roles & Access tabs",
+    "priority": "P0",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [],
+    "steps": [
+      {
+        "id": "step1",
+        "action": "openUrl",
+        "targetDescription": "Admin page",
+        "value": "https://qa-atlas.qtsolvdev.com/admin"
+      },
+      {
+        "id": "step2",
+        "action": "tap",
+        "targetDescription": "Salesforce login button",
+        "locatorHint": "text=Salesforce login"
+      },
+      {
+        "id": "step3",
+        "action": "tap",
+        "targetDescription": "Roles & Access tab",
+        "locatorHint": "role=tab[name=\"Roles & Access\"]"
+      },
+      {
+        "id": "step4",
+        "action": "assertVisible",
+        "targetDescription": "Roles & Access view",
+        "locatorHint": "data-testid=roles-access-view"
+      },
+      {
+        "id": "step5",
+        "action": "tap",
+        "targetDescription": "User Management tab",
+        "locatorHint": "role=tab[name=\"User Management\"]"
+      },
+      {
+        "id": "step6",
+        "action": "assertVisible",
+        "targetDescription": "User table",
+        "locatorHint": "table"
+      }
+    ],
+    "tags": [
+      "@smoke",
+      "@regression"
+    ]
+  }
+}

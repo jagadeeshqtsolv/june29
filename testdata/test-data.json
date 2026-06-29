@@ -56,5 +56,11 @@
   },
   "changingSearchQueryResetsPaginationToPage1": {
     "typeANewCharacterIntoSearch": "a"
+  },
+  "searchFiltersTableToShowMatchingUsers": {
+    "searchUserInput": "testuserinvite1"
+  },
+  "searchShowsNoUsersFoundMessageForNoMatches": {
+    "searchUserInput": "zzznomatch"
   }
 }

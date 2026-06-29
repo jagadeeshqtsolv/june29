@@ -100,3 +100,41 @@ test('Admin page loads with tabs in correct order, User Management active by def
     await userManagementPage.expectInviteUserText('Invite user');
   });
 });
+
+  test('User table renders exactly five columns in the correct order', { tag: ["@functional","@regression","@P0","@user-table-columns-order"] }, async ({ page, loginPage, userManagementPage }) => {
+    await test.step('Open — Navigate to Admin URL', async () => {
+      await page.goto(env.baseURL);
+    });
+
+    await test.step('Click — Salesforce login button', async () => {
+      await loginPage.clickLoginWithSalesforce();
+    });
+
+    await test.step('Assert visible — User table', async () => {
+      await userManagementPage.expectUsersTableVisible();
+    });
+
+    await test.step('Assert count — Header columns count', async () => {
+      await userManagementPage.expectHeaderColsCount(5);
+    });
+
+    await test.step('Assert text — Column 1: User information', async () => {
+      await userManagementPage.expectHeaderCol1Text('User information');
+    });
+
+    await test.step('Assert text — Column 2: Role', async () => {
+      await userManagementPage.expectHeaderCol2Text('Role');
+    });
+
+    await test.step('Assert text — Column 3: Status', async () => {
+      await userManagementPage.expectHeaderCol3Text('Status');
+    });
+
+    await test.step('Assert text — Column 4: Last active', async () => {
+      await userManagementPage.expectHeaderCol4Text('Last active');
+    });
+
+    await test.step('Assert text — Column 5: Account Access', async () => {
+      await userManagementPage.expectHeaderCol5Text('Account Access');
+    });
+  });
